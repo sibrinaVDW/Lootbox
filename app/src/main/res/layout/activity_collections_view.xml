@@ -114,6 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvCategoryList"
         android:layout_width="409dp"
         android:layout_height="494dp"
         app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
