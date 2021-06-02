@@ -10,7 +10,7 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
 
-        android:id="@+id/image"
+        android:id="@+id/imgThumbnail"
         android:src="@mipmap/ic_launcher"
     >
     </ImageView>
@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"
+            android:id="@+id/txtTitle"
             android:text="Main Text"
             android:textStyle="bold"
             android:textSize="20dp"
@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2"
+            android:id="@+id/txtDescription"
             android:text="sub Text"
             android:textSize="18dp"
             android:layout_margin="5dp"
