@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "452633151554",
+    "project_id": "lootbox-36a29",
+    "storage_bucket": "lootbox-36a29.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452633151554:android:6c15a5a01d88671f0685db",
+        "android_client_info": {
+          "package_name": "com.example.lootbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452633151554-d399n0jl04cucp6ghq7d5c7fsl0fqest.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lootbox",
+            "certificate_hash": "4c6e11bd166b8df33165a139becc0bd38b7a7e51"
+          }
+        },
+        {
+          "client_id": "452633151554-7m96g49q3rr5afqm4va802ion7mqlrtc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbXIH0GxZlx3rfrq50EfGnwNWLYR8HGzY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452633151554-7m96g49q3rr5afqm4va802ion7mqlrtc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
