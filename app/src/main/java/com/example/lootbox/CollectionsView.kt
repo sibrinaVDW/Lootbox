@@ -10,6 +10,7 @@ class CollectionsView : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf< String>()
     private var imagesList = mutableListOf<Int>()
+    //private AlertDialog.Builder diagBuild
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
