@@ -16,9 +16,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.006" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrFooter"
@@ -27,11 +28,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
         android:id="@+id/btnHamburger"
@@ -105,22 +102,22 @@
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="496dp"
+        android:layout_marginBottom="16dp"
         android:text="+"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrHeader" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvCategoryList"
-        android:layout_width="409dp"
-        android:layout_height="494dp"
-        app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
+        android:layout_width="405dp"
+        android:layout_height="461dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
-        tools:listitem="@layout/recycler_view_item" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/recycler_view_item_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
