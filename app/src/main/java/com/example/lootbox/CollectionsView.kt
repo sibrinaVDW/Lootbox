@@ -2,10 +2,11 @@ package com.example.lootbox
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,8 @@ class CollectionsView : AppCompatActivity() {
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
         recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList)
+
+        registerForContextMenu(recView)
 
         addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon)
         addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon)
