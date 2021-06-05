@@ -40,22 +40,23 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         override fun onMenuItemClick(item: MenuItem): Boolean {
             return when (item.itemId) {
                 R.id.btnGoalAdd -> {
-                    //onClick event
                             val diagView = LayoutInflater.from(this@ViewHolder.itemView.context).inflate(R.layout.new_goal_pop,null)
                             val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Create category")
                             val alertDiag = alertBuild.show()
 
-                            var create : Button = diagView.findViewById<Button>(R.id.btnCreate3)
+                            var create : Button = diagView.findViewById<Button>(R.id.btnGoalCreate)
                             create.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
-                                    val goalNum = diagView.findViewById<EditText>(R.id.edtCatName).text
+                                    val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text
+                                    //val goalShow :TextView = @CollectionsView.findViewById<TextView>(R.id.txtDescription)
+
                                     alertDiag.dismiss()
                                     Toast.makeText(itemView.context, "Created goal with $goalNum items for $itemView"  , Toast.LENGTH_SHORT).show()
                                    // addToList(catName,catDesc,R.drawable.launcher_icon)
                                 }
                             })
 
-                            var cancel : Button = diagView.findViewById<Button>(R.id.btnCancel3)
+                            var cancel : Button = diagView.findViewById<Button>(R.id.btnGoalCancel)
                             cancel.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
                                     alertDiag.dismiss()
