@@ -3,18 +3,20 @@ package com.example.lootbox
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 
 private const val REQUEST_CODE = 42
 class CollectionsView : AppCompatActivity() {
@@ -22,7 +24,6 @@ class CollectionsView : AppCompatActivity() {
     private var descList = mutableListOf< String>()
     private var imagesList = mutableListOf<Int>()
     var viewImage: ImageView? = null
-    //val diagView = LayoutInflater.from(this@CollectionsView).inflate(R.layout.new_cat_popup,null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +60,13 @@ class CollectionsView : AppCompatActivity() {
                 var create : Button = diagView.findViewById<Button>(R.id.btnCreate)
                 create.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v: View?) {
-                            val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
-                            val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-                            val catImg = diagView.findViewById<ImageView>(R.id.imgThumb).imageAlpha
-                            alertDiag.dismiss()
-                            addToList(catName,catDesc,catImg)
-                            //addToList(catName,catDesc,R.drawable.launcher_icon)
+                        val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
+                        val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
+                        val catImg = diagView.findViewById<ImageView>(R.id.imgThumb)
+                        val image = (catImg.getDrawable() as BitmapDrawable).bitmap
+                        alertDiag.dismiss()
+                        //addToList(catName,catDesc,image)
+                        //addToList(catName,catDesc,R.drawable.launcher_icon)
                     }
                 })
 
@@ -78,7 +80,6 @@ class CollectionsView : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //val viewImage  = findViewById<ImageView>(R.id.imgThumb)
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
         {
