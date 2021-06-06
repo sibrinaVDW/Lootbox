@@ -13,13 +13,19 @@
         android:theme="@style/Theme.Lootbox">
 
 
+
         <activity android:name=".GalleryImage">
+
+        </activity>
+
+        <activity android:name=".ItemListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <!--
          <activity android:name=".CollectionsView">
@@ -31,7 +37,7 @@
         </activity>
 
 
-        <!--<activity android:name=".MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

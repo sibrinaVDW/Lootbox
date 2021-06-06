@@ -84,7 +84,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.row,parent,false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.activity_item_list_item,parent,false)
         return  ViewHolder(v)
     }
 
