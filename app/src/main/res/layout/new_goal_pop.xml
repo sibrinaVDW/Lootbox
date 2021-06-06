@@ -19,20 +19,20 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <Button
-        android:id="@+id/btnCreate3"
+        android:id="@+id/btnGoalCreate"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_marginBottom="320dp"
         android:text="Create"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.193"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrompt"
-        app:layout_constraintVertical_bias="0.248" />
+        app:layout_constraintVertical_bias="0.163" />
 
     <Button
-        android:id="@+id/btnCancel3"
+        android:id="@+id/btnGoalCancel"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:text="Cancel"
@@ -40,11 +40,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.937"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/edtGoalNum"
         app:layout_constraintVertical_bias="0.128" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/edtGoalNum"
         android:layout_width="109dp"
         android:layout_height="46dp"
         android:ems="10"
@@ -64,7 +64,7 @@
         android:text="Set number of items needed in this category:"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/editTextNumber"
+        app:layout_constraintEnd_toStartOf="@+id/edtGoalNum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCatCreateTitle3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

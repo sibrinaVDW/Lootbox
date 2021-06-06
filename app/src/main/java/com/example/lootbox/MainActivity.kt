@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
+//import com.google.firebase.firestore.FirebaseFirestore
 
 private const val REQUEST_CODE = 42
 //private lateinit var filePhoto: File
@@ -25,8 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val db = FirebaseFirestore.getInstance()
-        val takeAPicture = findViewById<Button>(R.id.btnTakePicture)
+        //val db = FirebaseFirestore.getInstance()
+        val takeAPicture  = findViewById<Button>(R.id.btnTakePicture)
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
 
         takeAPicture.setOnClickListener {
