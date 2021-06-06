@@ -5,25 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginEnd="188dp"
-        android:text="Add Game"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/txtEnterGameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="86dp"
+        android:layout_marginTop="200dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Enter Game Name"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
@@ -31,20 +22,30 @@
         android:id="@+id/txtEnterGameDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="98dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="112dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Enter Game Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEnterGameName" />
 
-    <Button
-        android:id="@+id/btnAddGameToList"
+    <TextView
+        android:id="@+id/txtHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="51dp"
+        android:layout_marginTop="144dp"
+        android:layout_marginEnd="200dp"
+        android:text="Add Game"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnAddGameToList"
+        android:layout_width="102dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
         android:text="Add"
         app:layout_constraintEnd_toStartOf="@+id/btnCancelAdd"
         app:layout_constraintTop_toBottomOf="@+id/txtEnterGameDescription" />
@@ -53,9 +54,21 @@
         android:id="@+id/btnCancelAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="92dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="108dp"
         android:text="Cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEnterGameDescription" />
+
+    <ImageButton
+        android:id="@+id/imgGameImage"
+        android:layout_width="92dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
+        app:srcCompat="@android:drawable/ic_menu_report_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
