@@ -1,10 +1,9 @@
 package com.example.lootbox
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -12,9 +11,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toIcon
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,6 +26,7 @@ class CollectionsView : AppCompatActivity() {
     private var imagesList = mutableListOf<Int>()
     private var goalList = mutableListOf<Int>()
     var viewImage: ImageView? = null
+    var bitmap: Bitmap? = null
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -40,8 +41,8 @@ class CollectionsView : AppCompatActivity() {
         recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
 
 
-        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,0)
-        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon,0)
+        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,10)
+        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon,10)
 
         var showPopUp : Button = findViewById<Button>(R.id.btnAdd)
 
@@ -56,6 +57,12 @@ class CollectionsView : AppCompatActivity() {
                     viewImage = diagView.findViewById<ImageView>(R.id.imgThumb)
                     val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
                     startActivityForResult(gallery, pickImage)
+                    captureImg.buildDrawingCache()
+                    bitmap = captureImg.getDrawingCache()
+
+                    /*val intent = Intent(this, NewActivity::class.java)
+                    intent.putExtra("BitmapImage", bitmap)*/
+
                     /*val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     viewImage  = diagView.findViewById<ImageView>(R.id.imgThumb)
                     if (takePictureIntent.resolveActivity(this@CollectionsView.packageManager) != null) {
@@ -67,18 +74,20 @@ class CollectionsView : AppCompatActivity() {
 
                 var create : Button = diagView.findViewById<Button>(R.id.btnCreate)
                 create.setOnClickListener(object : View.OnClickListener {
+                    @RequiresApi(Build.VERSION_CODES.P)
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
                         //val catImg = diagView.findViewById<ImageView>(R.id.imgThumb).imageAlpha
-                        val catImage : Int = viewImage?.drawable!!.alpha
+                        //val catImage : Int = viewImage?.drawable!!.alpha
                         //val image = (catImg.getDrawable() as BitmapDrawable).bitmap
+                        addToList(catName,catDesc,bitmap?.toIcon()!!.resId,0)
                         alertDiag.dismiss()
-                        //addToList(catName,catDesc,catImg)
+                        //addToList(catName,catDesc,catImg,0)
                         //addToList(catName,catDesc,image = viewImage!!.)
                         //addToList(catName,catDesc,viewImage!!.imageAlpha)
-                        addToList(catName,catDesc,catImage,0)
-                        //addToList(catName,catDesc,R.drawable.launcher_icon)
+
+                        addToList(catName,catDesc,R.drawable.launcher_icon,0)
                     }
                 })
 

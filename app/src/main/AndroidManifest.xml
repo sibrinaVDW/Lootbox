@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
 
+        <activity android:name=".GalleryImage"></activity>
 
-         <activity android:name=".CollectionsView">
+         <activity android:name=".ItemListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
