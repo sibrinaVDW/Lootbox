@@ -14,10 +14,11 @@
 
 
 
-        <activity android:name=".GalleryImage"> </activity>
+        <activity android:name=".GalleryImage">
+
+        </activity>
 
         <activity android:name=".ItemListActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,8 +26,11 @@
             </intent-filter>
         </activity>
 
-        <!--
 
+        <!--
+=========
+
+>>>>>>>>> Temporary merge branch 2
          <activity android:name=".CollectionsView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
