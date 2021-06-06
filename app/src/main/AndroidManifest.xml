@@ -8,29 +8,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
 
 
-
-        <activity android:name=".GalleryImage">
-
-        </activity>
-
-        <activity android:name=".ItemListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-        <!--
-=========
-
->>>>>>>>> Temporary merge branch 2
          <activity android:name=".CollectionsView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +22,7 @@
         </activity>
 
 
-        <activity android:name=".MainActivity">
+        <!--<activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
