@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".ItemListActivity">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvItemList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/recycler_view_item" />
+
+    <ImageButton
+        android:id="@+id/imgAdd"
+        android:layout_width="82dp"
+        android:layout_height="77dp"
+        android:layout_marginBottom="52dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:srcCompat="@drawable/add_icon" />
+    tools:itemCount = "17"
+        tools:listItem="@layout/item_Layout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
