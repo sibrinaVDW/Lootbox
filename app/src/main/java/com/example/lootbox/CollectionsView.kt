@@ -24,6 +24,7 @@ class CollectionsView : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf< String>()
     private var imagesList = mutableListOf<Int>()
+    private var goalList = mutableListOf<Int>()
     var viewImage: ImageView? = null
 
     private val pickImage = 100
@@ -36,11 +37,11 @@ class CollectionsView : AppCompatActivity() {
 
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
-        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList)
+        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
 
 
-        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon)
-        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon)
+        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,0)
+        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon,0)
 
         var showPopUp : Button = findViewById<Button>(R.id.btnAdd)
 
@@ -76,7 +77,7 @@ class CollectionsView : AppCompatActivity() {
                         //addToList(catName,catDesc,catImg)
                         //addToList(catName,catDesc,image = viewImage!!.)
                         //addToList(catName,catDesc,viewImage!!.imageAlpha)
-                        addToList(catName,catDesc,catImage)
+                        addToList(catName,catDesc,catImage,0)
                         //addToList(catName,catDesc,R.drawable.launcher_icon)
                     }
                 })
@@ -95,7 +96,6 @@ class CollectionsView : AppCompatActivity() {
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
             viewImage?.setImageURI(imageUri)
-
         }
     }
 
@@ -112,15 +112,16 @@ class CollectionsView : AppCompatActivity() {
     }*/
 
 
-    private fun addToList(title: String, desc: String , image: Int){
+    private fun addToList(title: String, desc: String , image: Int, goal:Int){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
+        goalList.add(goal)
     }
 
     private fun postToList(){
         for (i in 1..3){
-            addToList("Title$i", "Description $i", R.drawable.launcher_icon)
+            addToList("Title$i", "Description $i", R.drawable.launcher_icon,0)
         }
     }
 }

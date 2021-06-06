@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Integer.parseInt
 
 
-class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>) :
+class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goal: List<Int>) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
@@ -50,8 +51,8 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                             var create : Button = diagView.findViewById<Button>(R.id.btnGoalCreate)
                             create.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
-                                    val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text
-
+                                    val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text.toString()
+                                    itemGoal = parseInt(goalNum)
                                     itemDesc.text = "You need to create $goalNum items for this category"
                                     alertDiag.dismiss()
                                 }
