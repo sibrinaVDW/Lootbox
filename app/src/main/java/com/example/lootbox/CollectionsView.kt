@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -24,6 +25,9 @@ class CollectionsView : AppCompatActivity() {
     private var descList = mutableListOf< String>()
     private var imagesList = mutableListOf<Int>()
     var viewImage: ImageView? = null
+
+    private val pickImage = 100
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +52,16 @@ class CollectionsView : AppCompatActivity() {
 
                 var captureImg: ImageView = diagView.findViewById<ImageView>(R.id.imgThumb)
                 captureImg.setOnClickListener {
-                    val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    viewImage = diagView.findViewById<ImageView>(R.id.imgThumb)
+                    val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                    startActivityForResult(gallery, pickImage)
+                    /*val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     viewImage  = diagView.findViewById<ImageView>(R.id.imgThumb)
                     if (takePictureIntent.resolveActivity(this@CollectionsView.packageManager) != null) {
                         startActivityForResult(takePictureIntent, REQUEST_CODE)
                     } else {
                         Toast.makeText(this@CollectionsView, "Unable to open camera", Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                 }
 
                 var create : Button = diagView.findViewById<Button>(R.id.btnCreate)
@@ -62,10 +69,14 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-                        val catImg = diagView.findViewById<ImageView>(R.id.imgThumb)
-                        val image = (catImg.getDrawable() as BitmapDrawable).bitmap
+                        //val catImg = diagView.findViewById<ImageView>(R.id.imgThumb).imageAlpha
+                        val catImage : Int = viewImage?.drawable!!.alpha
+                        //val image = (catImg.getDrawable() as BitmapDrawable).bitmap
                         alertDiag.dismiss()
-                        //addToList(catName,catDesc,image)
+                        //addToList(catName,catDesc,catImg)
+                        //addToList(catName,catDesc,image = viewImage!!.)
+                        //addToList(catName,catDesc,viewImage!!.imageAlpha)
+                        addToList(catName,catDesc,catImage)
                         //addToList(catName,catDesc,R.drawable.launcher_icon)
                     }
                 })
@@ -80,7 +91,17 @@ class CollectionsView : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+            viewImage?.setImageURI(imageUri)
+
+        }
+    }
+
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
+
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
         {
             val takenImage = data?.extras?.get("data") as Bitmap
@@ -88,8 +109,7 @@ class CollectionsView : AppCompatActivity() {
         } else{
             super.onActivityResult(requestCode, resultCode, data)
         }
-
-    }
+    }*/
 
 
     private fun addToList(title: String, desc: String , image: Int){
