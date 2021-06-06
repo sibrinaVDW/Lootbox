@@ -11,7 +11,7 @@
         android:id="@+id/tbrHeader"
         android:layout_width="414dp"
         android:layout_height="107dp"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/header_background"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,18 +25,19 @@
         android:id="@+id/tbrFooter"
         android:layout_width="413dp"
         android:layout_height="78dp"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/footer_background"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnHamburger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HB"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/burger_quick_button"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
@@ -44,11 +45,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.423" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PF"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:background="@drawable/profile_quick_button"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.978"
@@ -61,52 +62,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Collections"
-        android:textSize="30sp"
+        android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="@+id/tbrHeader"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:text="Home"
+        android:background="@drawable/home_quick_button"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="@+id/tbrFooter" />
-
-    <Button
-        android:id="@+id/btnCollections"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Collections"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="@+id/tbrFooter"
-        app:layout_constraintTop_toTopOf="@+id/tbrFooter" />
+        app:layout_constraintTop_toTopOf="@+id/tbrFooter"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnNotif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Notif"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/btnCollections"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/collections_quick_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toStartOf="@+id/tbrFooter" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tbrFooter"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/btnNotif"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/notifications_quick_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
+        app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
+        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintStart_toStartOf="@+id/tbrFooter"
+        app:layout_constraintTop_toTopOf="@+id/tbrFooter"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
         android:id="@+id/btnAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="+"
-        android:textSize="20sp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/add_icon"
         app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
