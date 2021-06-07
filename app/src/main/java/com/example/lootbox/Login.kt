@@ -26,9 +26,14 @@ class Login : AppCompatActivity() {
         val signUp = findViewById<Button>(R.id.button)
         val username = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
+        val signIn = findViewById<Button>(R.id.button2)
 
         signUp.setOnClickListener {
             createAccount(username.text.toString(), password.text.toString())
+        }
+
+        signIn.setOnClickListener {
+            login(username.text.toString(), password.text.toString())
         }
     }
 
@@ -57,6 +62,25 @@ class Login : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                    updateUI(null)
+                }
+            }
+    }
+
+    private fun login(email: String, password: String)
+    {
+        mAuth!!.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+                    val user = mAuth!!.currentUser
+                    updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                     updateUI(null)
