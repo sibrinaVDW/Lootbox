@@ -1,11 +1,14 @@
 package com.example.lootbox
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.*
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
@@ -22,7 +25,11 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         init {
             itemView.setOnClickListener{v:View ->
                 val pos: Int = adapterPosition
-                //Opens up items list (ernest)
+                val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
+                intent.putExtra("Goal",itemGoal)
+                intent.putExtra("Category", itemTitle.text)
+                v?.context.startActivity(intent)
+
                 Toast.makeText(itemView.context,"You clicked on item number ${pos+1}",Toast.LENGTH_SHORT).show()
             }
 
