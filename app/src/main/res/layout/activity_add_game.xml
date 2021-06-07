@@ -27,7 +27,7 @@
         android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="64dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnAddGame"
@@ -42,7 +42,7 @@
     <ImageButton
         android:id="@+id/btnCancel"
         android:layout_width="175dp"
-        android:layout_height="46dp"
+        android:layout_height="50dp"
         android:layout_marginTop="108dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/cancel_button"
@@ -86,11 +86,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="160dp"
         android:layout_marginBottom="17dp"
         android:text="Enter Game Description"
         app:layout_constraintBottom_toTopOf="@+id/txtGameDescription"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGameName"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
