@@ -1,15 +1,19 @@
 package com.example.lootbox
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.*
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.Integer.parseInt
 
 
-class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>) :
+class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goal: List<Int>) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
@@ -21,7 +25,11 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         init {
             itemView.setOnClickListener{v:View ->
                 val pos: Int = adapterPosition
-                //Opens up items list (ernest)
+                val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
+                intent.putExtra("Goal",itemGoal)
+                intent.putExtra("Category", itemTitle.text)
+                v?.context.startActivity(intent)
+
                 Toast.makeText(itemView.context,"You clicked on item number ${pos+1}",Toast.LENGTH_SHORT).show()
             }
 
@@ -50,8 +58,8 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                             var create : Button = diagView.findViewById<Button>(R.id.btnGoalCreate)
                             create.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
-                                    val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text
-
+                                    val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text.toString()
+                                    itemGoal = parseInt(goalNum)
                                     itemDesc.text = "You need to create $goalNum items for this category"
                                     alertDiag.dismiss()
                                 }
