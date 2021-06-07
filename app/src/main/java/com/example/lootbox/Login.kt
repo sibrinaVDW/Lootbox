@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -24,12 +25,20 @@ class Login : AppCompatActivity() {
         if(currentUser != null){
             Log.d(TAG, currentUser.displayName.toString())
         }
-        val signUp = findViewById<Button>(R.id.button)
+
+        val signUp : Button = findViewById<Button>(R.id.btnSignUp)
         val username = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
+        val signIn : ImageButton = findViewById<ImageButton>(R.id.btnSignIn)
 
         signUp.setOnClickListener {
             createAccount(username.text.toString(), password.text.toString())
+            val intent = Intent(this,CollectionsView::class.java).apply{}
+            startActivity(intent)
+        }
+
+        signIn.setOnClickListener {
+            //createAccount(username.text.toString(), password.text.toString())
             val intent = Intent(this,CollectionsView::class.java).apply{}
             startActivity(intent)
         }
