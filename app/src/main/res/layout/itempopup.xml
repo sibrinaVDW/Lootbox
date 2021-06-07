@@ -28,7 +28,7 @@
         android:id="@+id/txtEnterGameName"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="220dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="textPersonName"
@@ -95,7 +95,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtHeader"
-        app:srcCompat="@android:drawable/ic_menu_report_image" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHeader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
