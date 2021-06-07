@@ -2,19 +2,16 @@ package com.example.lootbox
 
 import android.app.Activity
 import android.content.Intent
-import android.icu.text.CaseMap
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.app.AlertDialog.Builder
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 private const val REQUEST_CODE = 42
 class ItemListActivity : AppCompatActivity() {
@@ -30,13 +27,16 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
         addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon)
+
+        val intent = intent
         goalAmount = intent.getIntExtra("Goal",0)
 
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList)
         numItems = rcvItemList?.adapter!!.itemCount
-        var goalIndic :TextView = findViewById(R.id.txtGoal)
+
+        var goalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
         goalIndic.text = "You have $numItems out of $goalAmount items collected"
 
         val btnAdd : Button = findViewById(R.id.btnAdd)
@@ -65,7 +65,10 @@ class ItemListActivity : AppCompatActivity() {
                     override fun onClick(v : View){
                         val gameName = diagPopUp.findViewById<EditText>(R.id.txtEnterGameName).text.toString()
                         val gameDescription = diagPopUp.findViewById<EditText>(R.id.txtEnterGameDescription).text.toString()
-                        addToList(gameName,gameDescription,R.mipmap.ic_launcher_round)
+                        addToList(gameName,gameDescription,R.drawable.launcher_icon)
+
+                        numItems = rcvItemList?.adapter!!.itemCount
+                        goalIndic.text = "You have $numItems out of $goalAmount items collected"
                         alertDialog.dismiss()
                     }
                 })
@@ -84,10 +87,10 @@ class ItemListActivity : AppCompatActivity() {
 
         val gameNameTextView : TextView = findViewById(R.id.txtGameName)
         var gameName : String = gameNameTextView.text.toString()
-        for(i:Int in 1..3){
+        /*for(i:Int in 1..3){
          //   addToList(gameName,gameDescription,gameImage)
             addToList("Game Name $i","Description $i",R.mipmap.ic_launcher_round)
-        }
+        }*/
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 

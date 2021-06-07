@@ -81,7 +81,7 @@ class CollectionsView : AppCompatActivity() {
                         //val catImg = diagView.findViewById<ImageView>(R.id.imgThumb).imageAlpha
                         //val catImage : Int = viewImage?.drawable!!.alpha
                         //val image = (catImg.getDrawable() as BitmapDrawable).bitmap
-                        addToList(catName,catDesc,bitmap?.toIcon()!!.resId,0)
+                        //addToList(catName,catDesc,bitmap?.toIcon()!!.resId,0)
                         alertDiag.dismiss()
                         //addToList(catName,catDesc,catImg,0)
                         //addToList(catName,catDesc,image = viewImage!!.)
