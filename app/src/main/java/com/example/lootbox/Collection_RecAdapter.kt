@@ -27,6 +27,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                 val pos: Int = adapterPosition
                 val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
                 intent.putExtra("Goal",itemGoal)
+                intent.putExtra("Category", itemTitle.text)
                 v?.context.startActivity(intent)
 
                 Toast.makeText(itemView.context,"You clicked on item number ${pos+1}",Toast.LENGTH_SHORT).show()

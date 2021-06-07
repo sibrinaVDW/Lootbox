@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -44,7 +45,7 @@ class CollectionsView : AppCompatActivity() {
         addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,10)
         addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon,10)
 
-        var showPopUp : Button = findViewById<Button>(R.id.btnAdd)
+        var showPopUp : ImageButton = findViewById<ImageButton>(R.id.btnAdd)
 
         showPopUp.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
@@ -59,17 +60,6 @@ class CollectionsView : AppCompatActivity() {
                     startActivityForResult(gallery, pickImage)
                     captureImg.buildDrawingCache()
                     bitmap = captureImg.getDrawingCache()
-
-                    /*val intent = Intent(this, NewActivity::class.java)
-                    intent.putExtra("BitmapImage", bitmap)*/
-
-                    /*val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    viewImage  = diagView.findViewById<ImageView>(R.id.imgThumb)
-                    if (takePictureIntent.resolveActivity(this@CollectionsView.packageManager) != null) {
-                        startActivityForResult(takePictureIntent, REQUEST_CODE)
-                    } else {
-                        Toast.makeText(this@CollectionsView, "Unable to open camera", Toast.LENGTH_LONG).show()
-                    }*/
                 }
 
                 var create : Button = diagView.findViewById<Button>(R.id.btnCreate)
@@ -108,29 +98,11 @@ class CollectionsView : AppCompatActivity() {
         }
     }
 
-    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
-
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
-        {
-            val takenImage = data?.extras?.get("data") as Bitmap
-            viewImage?.setImageBitmap(takenImage)
-        } else{
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }*/
-
 
     private fun addToList(title: String, desc: String , image: Int, goal:Int){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
         goalList.add(goal)
-    }
-
-    private fun postToList(){
-        for (i in 1..3){
-            addToList("Title$i", "Description $i", R.drawable.launcher_icon,0)
-        }
     }
 }

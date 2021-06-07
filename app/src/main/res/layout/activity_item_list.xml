@@ -11,8 +11,9 @@
         android:id="@+id/rcvItemList"
         android:layout_width="418dp"
         android:layout_height="472dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="68dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
         tools:listitem="@layout/recycler_view_item" />
@@ -125,12 +126,24 @@
         android:id="@+id/txtGoal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="44dp"
         android:text="Goal is......"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.005"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbrHeader" />
+
+    <TextView
+        android:id="@+id/txtCatName"
+        android:layout_width="195dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Goal is......"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader" /><![CDATA[
 

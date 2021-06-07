@@ -1,5 +1,6 @@
 package com.example.lootbox
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +30,8 @@ class Login : AppCompatActivity() {
 
         signUp.setOnClickListener {
             createAccount(username.text.toString(), password.text.toString())
+            val intent = Intent(this,CollectionsView::class.java).apply{}
+            startActivity(intent)
         }
     }
 

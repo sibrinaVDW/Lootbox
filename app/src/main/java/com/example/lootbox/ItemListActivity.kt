@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 
 private const val REQUEST_CODE = 42
 class ItemListActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class ItemListActivity : AppCompatActivity() {
     var viewImage :  ImageButton? = null
     var numItems : Int = 0
     private var goalAmount :Int = 0
+    private var categoryPass : String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,7 @@ class ItemListActivity : AppCompatActivity() {
 
         val intent = intent
         goalAmount = intent.getIntExtra("Goal",0)
+        categoryPass = intent.getStringExtra("Category")
 
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
@@ -38,6 +41,8 @@ class ItemListActivity : AppCompatActivity() {
 
         var goalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
         goalIndic.text = "You have $numItems out of $goalAmount items collected"
+        var catDisp : TextView =  findViewById(R.id.txtCatName)
+        catDisp.text = categoryPass
 
         val btnAdd : Button = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
