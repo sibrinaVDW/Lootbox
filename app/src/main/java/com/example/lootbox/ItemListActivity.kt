@@ -44,7 +44,7 @@ class ItemListActivity : AppCompatActivity() {
         var catDisp : TextView =  findViewById(R.id.txtCatName)
         catDisp.text = categoryPass
 
-        val btnAdd : Button = findViewById(R.id.btnAdd)
+        val btnAdd : ImageButton = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v:View){
                 val diagPopUp = LayoutInflater.from(this@ItemListActivity).inflate(R.layout.itempopup,null)
