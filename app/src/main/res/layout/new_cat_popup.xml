@@ -7,8 +7,8 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="411dp"
-        android:layout_height="522dp"
+        android:layout_width="420dp"
+        android:layout_height="500dp"
         android:background="@drawable/page_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
         android:background="@drawable/popup_header"
         app:layout_constraintBottom_toTopOf="@+id/imgThumb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -59,7 +59,7 @@
     <ImageButton
         android:id="@+id/btnCreate"
         android:layout_width="175dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:background="@drawable/create_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
     <ImageButton
         android:id="@+id/btnCancel"
         android:layout_width="175dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:background="@drawable/cancel_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
