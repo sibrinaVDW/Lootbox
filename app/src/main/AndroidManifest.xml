@@ -13,10 +13,9 @@
         android:theme="@style/Theme.Lootbox">
 
 
-
-        <activity android:name=".GalleryImage">
-
-        </activity>
+        <activity android:name=".GalleryImage"></activity>
+        <activity android:name=".CollectionsView"></activity>
+        <activity android:name=".ItemListActivity"></activity>
 
         <activity android:name=".Login">
             <intent-filter>

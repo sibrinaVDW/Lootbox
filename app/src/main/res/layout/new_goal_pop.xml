@@ -5,6 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="420dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/page_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="90dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/popup_header"
+        app:layout_constraintBottom_toTopOf="@+id/txtPrompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/txtCatCreateTitle3"
         android:layout_width="295dp"
@@ -12,18 +31,19 @@
         android:text="Create Goal"
         android:textAlignment="center"
         android:textSize="30sp"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnGoalCreate"
-        android:layout_width="153dp"
-        android:layout_height="43dp"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="320dp"
-        android:text="Create"
+        android:background="@drawable/create_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
@@ -31,30 +51,32 @@
         app:layout_constraintTop_toBottomOf="@+id/txtPrompt"
         app:layout_constraintVertical_bias="0.163" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btnGoalCancel"
-        android:layout_width="153dp"
-        android:layout_height="43dp"
-        android:text="Cancel"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:background="@drawable/cancel_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtGoalNum"
-        app:layout_constraintVertical_bias="0.128" />
+        app:layout_constraintVertical_bias="0.101" />
 
     <EditText
         android:id="@+id/edtGoalNum"
-        android:layout_width="109dp"
-        android:layout_height="46dp"
+        android:layout_width="110dp"
+        android:layout_height="55dp"
+        android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="number"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/txtPrompt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
+        app:layout_constraintHorizontal_bias="0.893"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtPrompt"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
         android:id="@+id/txtPrompt"

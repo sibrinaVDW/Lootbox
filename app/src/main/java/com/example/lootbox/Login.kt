@@ -27,15 +27,13 @@ class Login : AppCompatActivity() {
         if(currentUser != null){
             Log.d(TAG, currentUser.displayName.toString())
         }
-        val signUp = findViewById<Button>(R.id.button)
+        val signUp = findViewById<Button>(R.id.btnSignUp)
         val username = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
-        val signIn = findViewById<ImageButton>(R.id.button2)
+        val signIn = findViewById<ImageButton>(R.id.btnSignIn)
 
         signUp.setOnClickListener {
             createAccount(username.text.toString(), password.text.toString())
-            val intent = Intent(this,CollectionsView::class.java).apply{}
-            startActivity(intent)
         }
 
         signIn.setOnClickListener {
@@ -59,12 +57,14 @@ class Login : AppCompatActivity() {
 
     private fun createAccount(email: String, password: String) {
         mAuth!!.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(this@Login) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth!!.currentUser
                     updateUI(user)
+                    val intent = Intent(this@Login,CollectionsView::class.java).apply{}
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
@@ -84,6 +84,8 @@ class Login : AppCompatActivity() {
                     Log.d(TAG, "signInWithEmail:success")
                     val user = mAuth!!.currentUser
                     updateUI(user)
+                    val intent = Intent(this@Login,CollectionsView::class.java).apply{}
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)

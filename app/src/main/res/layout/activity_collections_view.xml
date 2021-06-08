@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".CollectionsView">
 
+    <ImageView
+        android:layout_width="450dp"
+        android:layout_height="750dp"
+        android:background="@drawable/page_background"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
         android:layout_width="414dp"
@@ -131,9 +140,10 @@
         android:layout_height="461dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/recycler_view_item_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
