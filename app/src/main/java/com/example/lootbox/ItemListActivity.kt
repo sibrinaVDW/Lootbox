@@ -71,7 +71,6 @@ class ItemListActivity : AppCompatActivity() {
                         val gameName = diagPopUp.findViewById<EditText>(R.id.txtEnterGameName).text.toString()
                         val gameDescription = diagPopUp.findViewById<EditText>(R.id.txtEnterGameDescription).text.toString()
                         addToList(gameName,gameDescription,R.drawable.launcher_icon)
-
                         numItems = rcvItemList?.adapter!!.itemCount
                         goalIndic.text = "You have $numItems out of $goalAmount items collected"
                         alertDialog.dismiss()
