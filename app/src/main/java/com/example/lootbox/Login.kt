@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,7 +30,7 @@ class Login : AppCompatActivity() {
         val signUp = findViewById<Button>(R.id.button)
         val username = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
-        val signIn = findViewById<Button>(R.id.button2)
+        val signIn = findViewById<ImageButton>(R.id.button2)
 
         signUp.setOnClickListener {
             createAccount(username.text.toString(), password.text.toString())
