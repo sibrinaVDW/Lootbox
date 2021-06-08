@@ -29,6 +29,7 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
         addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon)
+        addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon)
 
         val intent = intent
         goalAmount = intent.getIntExtra("Goal",0)
@@ -52,7 +53,6 @@ class ItemListActivity : AppCompatActivity() {
                 val alertDialog = alertBuilder.show()
 
                 val takeAPicture = diagPopUp.findViewById<ImageButton>(R.id.imgGameImage)
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
 
                 takeAPicture.setOnClickListener {
                     val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -64,7 +64,7 @@ class ItemListActivity : AppCompatActivity() {
                     }
                 }
 
-                var add : Button = diagPopUp.findViewById(R.id.btnAddGameToList)
+                var add : ImageButton = diagPopUp.findViewById(R.id.btnAddGameToList)
 
                 add.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v : View){
@@ -88,18 +88,8 @@ class ItemListActivity : AppCompatActivity() {
         descriptionList.add(description)
         imageList.add(image)
     }
-    public fun postToItemList(gameName : String, gameDescription: String, gameImage : Int){
 
-        val gameNameTextView : TextView = findViewById(R.id.txtGameName)
-        var gameName : String = gameNameTextView.text.toString()
-        /*for(i:Int in 1..3){
-         //   addToList(gameName,gameDescription,gameImage)
-            addToList("Game Name $i","Description $i",R.mipmap.ic_launcher_round)
-        }*/
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.extras?.get("data") as Bitmap
             viewImage?.setImageBitmap(takenImage)

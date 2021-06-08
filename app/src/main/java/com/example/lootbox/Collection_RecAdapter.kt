@@ -29,8 +29,6 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                 intent.putExtra("Goal",itemGoal)
                 intent.putExtra("Category", itemTitle.text)
                 v?.context.startActivity(intent)
-
-                Toast.makeText(itemView.context,"You clicked on item number ${pos+1}",Toast.LENGTH_SHORT).show()
             }
 
 
@@ -55,7 +53,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                             val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Create category")
                             val alertDiag = alertBuild.show()
 
-                            var create : Button = diagView.findViewById<Button>(R.id.btnGoalCreate)
+                            var create : ImageButton = diagView.findViewById<ImageButton>(R.id.btnGoalCreate)
                             create.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
                                     val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text.toString()
@@ -65,7 +63,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                                 }
                             })
 
-                            var cancel : Button = diagView.findViewById<Button>(R.id.btnGoalCancel)
+                            var cancel : ImageButton = diagView.findViewById<ImageButton>(R.id.btnGoalCancel)
                             cancel.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
                                     alertDiag.dismiss()
