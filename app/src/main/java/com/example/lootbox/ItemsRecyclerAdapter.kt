@@ -13,7 +13,7 @@ class ItemsRecyclerAdapter(
     private var gameTitles: List<String>,
     private var gameDescriptions: List<String>,
     private var gameImages: List<Int>,
-    private var gameDates : List<Date>
+    private var gameDates : List<String>
 ) :
     RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -69,20 +69,11 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
+
                         addToList(catName,catDesc,R.drawable.launcher_icon)
-                        /*for (i in 1..recView?.adapter!!.itemCount){
-                            recView?.adapter!!.onBindViewHolder(catName,catDesc,R.drawable.launcher_icon)
-                        }*/
-                        //val catImg = diagView.findViewById<ImageView>(R.id.imgThumb).imageAlpha
-                        //val catImage : Int(convertImage2Base64())
-                        //val image = (catImg.getDrawable() as BitmapDrawable).bitmap
-                        //addToList(catName,catDesc,bitmap?.toIcon()!!.resId,0)
+                        recView.layoutManager = LinearLayoutManager(this@CollectionsView)
+                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList)
                         alertDiag.dismiss()
-                        //addToList(catName,catDesc,catImg,0)
-                        //addToList(catName,catDesc,image = viewImage!!.)
-                        //addToList(catName,catDesc,viewImage!!.imageAlpha)
-                        //addToList(catName,catDesc,catImg.alpha,0)
-                        //addToList(catName,catDesc,bitmapPass,0)
                     }
                 })
 
@@ -95,16 +86,6 @@ class CollectionsView : AppCompatActivity() {
             }})
     }
 
-    /*private fun saveImage(imagePath: String) {
-        //pictureChanged = true
-        try {
-            val file = FileInputStream(imagePath)
-            val image = ByteArray(file.available())
-            file.read(image)
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -120,11 +101,11 @@ class CollectionsView : AppCompatActivity() {
         }
     }
 
-
-    private fun addToList(title: String, desc: String , image: Int){
+    public fun addToList(title: String, desc: String , image: Int){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
     }
+
 
 }
