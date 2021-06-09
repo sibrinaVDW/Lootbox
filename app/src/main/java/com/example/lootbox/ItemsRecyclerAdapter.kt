@@ -16,7 +16,7 @@ class ItemsRecyclerAdapter(
     RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
-        val itemDescription: TextView = itemView.findViewById(R.id.txtDescription)
+        val itemDescription: TextView = itemView.findViewById(R.id.txtDate)
         val itemPicture: ImageView = itemView.findViewById(R.id.imgThumbnail)
 
         //this is where I am

@@ -1,14 +1,12 @@
 package com.example.lootbox
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.*
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
@@ -18,7 +16,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
         val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
-        val itemDesc: TextView = itemView.findViewById(R.id.txtDescription)
+        val itemDesc: TextView = itemView.findViewById(R.id.txtDate)
         val itemThumbnail : ImageView = itemView.findViewById(R.id.imgThumbnail)
         var itemGoal : Int = 0
         //store in list, view list

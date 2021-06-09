@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
 
-
         <activity android:name=".GalleryImage"></activity>
         <activity android:name=".CollectionsView"></activity>
         <activity android:name=".ItemListActivity"></activity>
@@ -24,8 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <!--
          <activity android:name=".CollectionsView">
             <intent-filter>
