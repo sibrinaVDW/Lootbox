@@ -13,13 +13,19 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
 
-class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goal: List<Int>) :
+public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
+    private var titlesList = mutableListOf<String>()
+    private var descList = mutableListOf< String>()
+    private var imagesList = mutableListOf<Int>()
+
+
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
-        val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
-        val itemDesc: TextView = itemView.findViewById(R.id.txtDescription)
-        val itemThumbnail : ImageView = itemView.findViewById(R.id.imgThumbnail)
+        public val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
+        public val itemDesc: TextView = itemView.findViewById(R.id.txtDescription)
+        public val itemThumbnail : ImageView = itemView.findViewById(R.id.imgThumbnail)
+
         var itemGoal : Int = 0
         //store in list, view list
         init {
@@ -50,7 +56,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
             return when (item.itemId) {
                 R.id.btnGoalAdd -> {
                             val diagView = LayoutInflater.from(this@ViewHolder.itemView.context).inflate(R.layout.new_goal_pop,null)
-                            val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Create category")
+                            val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Set Goal")
                             val alertDiag = alertBuild.show()
 
                             var create : ImageButton = diagView.findViewById<ImageButton>(R.id.btnGoalCreate)
@@ -103,4 +109,6 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
     override fun getItemCount(): Int {
         return title.size
     }
+
+
 }

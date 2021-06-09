@@ -118,6 +118,7 @@
         android:layout_width="350dp"
         android:layout_height="70dp"
         android:background="@drawable/signin_button"
+        android:tint="#002E2E2E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
