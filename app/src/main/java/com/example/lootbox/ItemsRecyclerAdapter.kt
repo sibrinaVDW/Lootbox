@@ -20,7 +20,7 @@ class ItemsRecyclerAdapter(
         val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
         val itemDescription: TextView = itemView.findViewById(R.id.txtDescription)
         val itemPicture: ImageView = itemView.findViewById(R.id.imgThumbnail)
-        //val itemDate : TextView = itemView.findViewById(R.id.txtDate)
+        val itemDate : TextView = itemView.findViewById(R.id.txtDate)
 
         //this is where I am
         init {
@@ -50,7 +50,7 @@ class ItemsRecyclerAdapter(
         holder.itemTitle.text = gameTitles[position]
         holder.itemDescription.text = gameDescriptions[position]
         holder.itemPicture.setImageResource(gameImages[position])
-        //holder.itemDate.text = gameDates[position]
+        holder.itemDate.text = gameDates[position]
     }
 
 }

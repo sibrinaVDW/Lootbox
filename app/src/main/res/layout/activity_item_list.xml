@@ -19,10 +19,11 @@
 
     <TextView
         android:id="@+id/txtCatName"
-        android:layout_width="400dp"
-        android:layout_height="25dp"
+        android:layout_width="404dp"
+        android:layout_height="38dp"
         android:textAlignment="center"
         android:textColor="#000000"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader" />
@@ -34,24 +35,20 @@
         android:layout_marginTop="8dp"
         android:textAlignment="textStart"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/rcvItemList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCatName"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCatName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvItemList"
-        android:layout_width="410dp"
-        android:layout_height="401dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        android:layout_width="408dp"
+        android:layout_height="381dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/txtGoal"
         tools:listitem="@layout/recycler_view_item" />
 
     <androidx.appcompat.widget.Toolbar
@@ -70,14 +67,17 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrFooter"
-        android:layout_width="413dp"
-        android:layout_height="78dp"
+        android:layout_width="430dp"
+        android:layout_height="90dp"
         android:background="@drawable/footer_background"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/btnHamburger"
@@ -161,12 +161,11 @@
         android:id="@+id/btnAdd"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/camera_icon"
-        app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" /><![CDATA[
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcvItemList" /><![CDATA[
 
 
 

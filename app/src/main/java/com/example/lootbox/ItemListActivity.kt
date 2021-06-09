@@ -24,6 +24,8 @@ class ItemListActivity : AppCompatActivity() {
     private var descriptionList = mutableListOf<String>()
     private var imageList = mutableListOf<Int>()
     private var dateList = mutableListOf<String>()
+    var dateDisp : TextView? = null
+
     var viewImage :  ImageButton? = null
     var numItems : Int = 0
     private var goalAmount :Int = 0
@@ -58,6 +60,7 @@ class ItemListActivity : AppCompatActivity() {
                 val diagPopUp = LayoutInflater.from(this@ItemListActivity).inflate(R.layout.itempopup,null)
                 val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(diagPopUp).setTitle("Add Game")
                 val alertDialog = alertBuilder.show()
+                dateDisp = diagPopUp.findViewById(R.id.EnterDate)
 
                 val takeAPicture = diagPopUp.findViewById<ImageButton>(R.id.imgGameImage)
 
@@ -77,8 +80,7 @@ class ItemListActivity : AppCompatActivity() {
                         cal.set(Calendar.YEAR, year)
                         cal.set(Calendar.MONTH, monthOfYear)
                         cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                        //val sdf = SimpleDateFormat(myFormat, Locale.UK)
-                        //textview_date!!.text = sdf.format(cal.getTime())
+                        dateDisp?.text = sdf.format(cal.getTime())
                     }
                 }
 
@@ -87,7 +89,6 @@ class ItemListActivity : AppCompatActivity() {
                     override fun onClick(view: View) {
                         DatePickerDialog(this@ItemListActivity,
                             dateSetListener,
-                            // set DatePickerDialog to point to today's date when it loads up
                             cal.get(Calendar.YEAR),
                             cal.get(Calendar.MONTH),
                             cal.get(Calendar.DAY_OF_MONTH)).show()
@@ -100,10 +101,18 @@ class ItemListActivity : AppCompatActivity() {
                     override fun onClick(v : View){
                         val gameName = diagPopUp.findViewById<EditText>(R.id.txtEnterGameName).text.toString()
                         val gameDescription = diagPopUp.findViewById<EditText>(R.id.txtEnterGameDescription).text.toString()
-                        //addToList(gameName,gameDescription,R.drawable.launcher_icon)
                         addToList(gameName,gameDescription,R.drawable.launcher_icon,sdf.format(cal.getTime()))
+                        rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
+                        rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
                         numItems = rcvItemList?.adapter!!.itemCount
                         goalIndic.text = "You have $numItems out of $goalAmount items collected"
+                        alertDialog.dismiss()
+                    }
+                })
+
+                var cancel : ImageButton = diagPopUp.findViewById<ImageButton>(R.id.btnCancelAdd)
+                cancel.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
                         alertDialog.dismiss()
                     }
                 })
