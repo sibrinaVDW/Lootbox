@@ -30,8 +30,9 @@ class CollectionsView : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf< String>()
     private var imagesList = mutableListOf<Int>()
+    private var goalList = mutableListOf<String>()
+
     var viewImage: ImageView? = null
-    var bitmapPass: Bitmap? = null
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -42,10 +43,10 @@ class CollectionsView : AppCompatActivity() {
 
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
-        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList)
+        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
 
-        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon)
-        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon)
+        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,"Goal: 10")
+        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon, "Goal: 5")
 
         var showPopUp : ImageButton = findViewById<ImageButton>(R.id.btnAdd)
 
@@ -69,10 +70,9 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-
-                        addToList(catName,catDesc,R.drawable.launcher_icon)
+                        addToList(catName,catDesc,R.drawable.launcher_icon,"Goal: 0")
                         recView.layoutManager = LinearLayoutManager(this@CollectionsView)
-                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList)
+                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
                         alertDiag.dismiss()
                     }
                 })
@@ -91,20 +91,15 @@ class CollectionsView : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
-            //bitmapPass = data?.extras!!.get("data") as Bitmap
-            /*val bitmap = (bitmapPass.getDrawable() as BitmapDrawable).bitmap
-            val stream = ByteArrayOutputStream()
-            bitmapPass.compress(Bitmap.CompressFormat.PNG, 90, stream)
-            val image: ByteArray = stream.toByteArray()
-            return "data:image/jpeg;base64," + Base64.encodeToString(image, 0)*/
             viewImage?.setImageURI(imageUri)
         }
     }
 
-    public fun addToList(title: String, desc: String , image: Int){
+    private fun addToList(title: String, desc: String , image: Int, goal : String){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
+        goalList.add(goal)
     }
 
 
