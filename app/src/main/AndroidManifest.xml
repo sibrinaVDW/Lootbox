@@ -11,12 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
-
-
-        <activity android:name=".GalleryImage"></activity>
-        <!--<activity android:name=".CollectionsView"></activity>-->
-        <activity android:name=".ItemListActivity"></activity>
-
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".Goals" />
+        <activity android:name=".GalleryImage" /> <!-- <activity android:name=".CollectionsView"></activity> -->
+        <activity android:name=".ItemListActivity" />
         <activity android:name=".CollectionsView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,25 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <!--
-         <activity android:name=".CollectionsView">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
     </application>
 
 </manifest>

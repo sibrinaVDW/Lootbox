@@ -135,7 +135,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvCategoryList"
+        android:id="@+id/rcvGoalsList"
         android:layout_width="405dp"
         android:layout_height="461dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAddGoal"
