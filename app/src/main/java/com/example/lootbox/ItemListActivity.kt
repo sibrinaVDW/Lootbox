@@ -1,100 +1,141 @@
 package com.example.lootbox
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
-import android.icu.text.CaseMap
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.app.AlertDialog.Builder
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
+import java.text.SimpleDateFormat
+import java.util.*
+
 private const val REQUEST_CODE = 42
 class ItemListActivity : AppCompatActivity() {
 
     private var titlesList = mutableListOf<String>()
     private var descriptionList = mutableListOf<String>()
     private var imageList = mutableListOf<Int>()
+    private var dateList = mutableListOf<String>()
+    var dateDisp : TextView? = null
 
-
+    var viewImage :  ImageButton? = null
+    var numItems : Int = 0
+    private var goalAmount :Int = 0
+    private var categoryPass : String? = ""
+    var cal = Calendar.getInstance()
+    val myFormat = "dd/MM/yyyy"
+    val sdf = SimpleDateFormat(myFormat, Locale.UK)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
+        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+        addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
 
+        val intent = intent
+        goalAmount = intent.getIntExtra("Goal",0)
+        categoryPass = intent.getStringExtra("Category")
 
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
-        rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList)
+        rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
+        numItems = rcvItemList?.adapter!!.itemCount
 
-//for taking a picture
-        val takeAPicture = findViewById<ImageButton>(R.id.imgGameImage)
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
+        var goalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
+        goalIndic.text = "You have $numItems out of $goalAmount items collected"
+        var catDisp : TextView =  findViewById(R.id.txtCatName)
+        catDisp.text = categoryPass
 
-        takeAPicture.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-
-            if (takePictureIntent.resolveActivity(this.packageManager) != null) {
-                startActivityForResult(takePictureIntent, REQUEST_CODE)
-            } else {
-                Toast.makeText(this, "Unable to open camera", Toast.LENGTH_LONG).show()
-            }
-        }
-
-        val btnAdd : Button = findViewById(R.id.btnAdd)
+        val btnAdd : ImageButton = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v:View){
                 val diagPopUp = LayoutInflater.from(this@ItemListActivity).inflate(R.layout.itempopup,null)
                 val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(diagPopUp).setTitle("Add Game")
                 val alertDialog = alertBuilder.show()
+                dateDisp = diagPopUp.findViewById(R.id.EnterDate)
 
-                var add : Button = diagPopUp.findViewById(R.id.btnAddGameToList)
+                val takeAPicture = diagPopUp.findViewById<ImageButton>(R.id.imgGameImage)
+
+                takeAPicture.setOnClickListener {
+                    val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    viewImage = diagPopUp.findViewById<ImageButton>(R.id.imgGameImage)
+                    if (takePictureIntent.resolveActivity(this@ItemListActivity.packageManager) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_CODE)
+                    } else {
+                        Toast.makeText(this@ItemListActivity, "Unable to open camera", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+                    override fun onDateSet(view: DatePicker, year: Int, monthOfYear: Int,
+                                           dayOfMonth: Int) {
+                        cal.set(Calendar.YEAR, year)
+                        cal.set(Calendar.MONTH, monthOfYear)
+                        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                        dateDisp?.text = sdf.format(cal.getTime())
+                    }
+                }
+
+                val chooseDate = diagPopUp.findViewById<TextView>(R.id.EnterDate)
+                chooseDate.setOnClickListener(object : View.OnClickListener  {
+                    override fun onClick(view: View) {
+                        DatePickerDialog(this@ItemListActivity,
+                            dateSetListener,
+                            cal.get(Calendar.YEAR),
+                            cal.get(Calendar.MONTH),
+                            cal.get(Calendar.DAY_OF_MONTH)).show()
+                    }
+                })
+
+                var add : ImageButton = diagPopUp.findViewById(R.id.btnAddGameToList)
 
                 add.setOnClickListener(object : View.OnClickListener {
                     override fun onClick(v : View){
                         val gameName = diagPopUp.findViewById<EditText>(R.id.txtEnterGameName).text.toString()
                         val gameDescription = diagPopUp.findViewById<EditText>(R.id.txtEnterGameDescription).text.toString()
-                        addToList(gameName,gameDescription,R.mipmap.ic_launcher_round)
+                        addToList(gameName,gameDescription,R.drawable.launcher_icon,sdf.format(cal.getTime()))
+                        rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
+                        rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
+                        numItems = rcvItemList?.adapter!!.itemCount
+                        goalIndic.text = "You have $numItems out of $goalAmount items collected"
                         alertDialog.dismiss()
-
                     }
                 })
 
-
+                var cancel : ImageButton = diagPopUp.findViewById<ImageButton>(R.id.btnCancelAdd)
+                cancel.setOnClickListener(object : View.OnClickListener {
+                    override fun onClick(v: View?) {
+                        alertDialog.dismiss()
+                    }
+                })
 
             }
         })
-
-
     }
-    public fun addToList(title: String, description: String, image:Int){
+
+    public fun addToList(title: String, description: String, image:Int, date:String){
         titlesList.add(title)
         descriptionList.add(description)
         imageList.add(image)
+        dateList.add(date)
     }
-    public fun postToItemList(gameName : String, gameDescription: String, gameImage : Int){
 
-        val gameNameTextView : TextView = findViewById(R.id.txtGameName)
-        var gameName : String = gameNameTextView.text.toString()
-        for(i:Int in 1..3){
-         //   addToList(gameName,gameDescription,gameImage)
-            addToList("Game Name $i","Description $i",R.mipmap.ic_launcher_round)
-        }
-    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val viewImage = findViewById<ImageView>(R.id.imageView01)
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ID
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.extras?.get("data") as Bitmap
-            viewImage.setImageBitmap(takenImage)
+            viewImage?.setImageBitmap(takenImage)
         } else {
             super.onActivityResult(requestCode, requestCode, data)
         }
     }
 
 }
+

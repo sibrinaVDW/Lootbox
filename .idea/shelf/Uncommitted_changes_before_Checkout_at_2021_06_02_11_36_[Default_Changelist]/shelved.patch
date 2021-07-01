@@ -1,0 +1,96 @@
+Index: app/src/main/res/layout/activity_collections_view.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/recCollections\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".CollectionsView\">\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/tbrHeader\"\r\n        android:layout_width=\"414dp\"\r\n        android:layout_height=\"107dp\"\r\n        android:background=\"?attr/colorPrimary\"\r\n        android:minHeight=\"?attr/actionBarSize\"\r\n        android:theme=\"?attr/actionBarTheme\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n    <androidx.appcompat.widget.Toolbar\r\n        android:id=\"@+id/tbrFooter\"\r\n        android:layout_width=\"413dp\"\r\n        android:layout_height=\"78dp\"\r\n        android:background=\"?attr/colorPrimary\"\r\n        android:minHeight=\"?attr/actionBarSize\"\r\n        android:theme=\"?attr/actionBarTheme\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnHamburger\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"HB\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.053\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.423\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnProfile\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"PF\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.978\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.423\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/txtPgTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"My Collections\"\r\n        android:textSize=\"30sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/tbrHeader\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnHome\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"12dp\"\r\n        android:text=\"Home\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/tbrFooter\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.053\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/tbrFooter\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnCollections\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Collections\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/tbrFooter\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/tbrFooter\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/tbrFooter\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnNotif\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"16dp\"\r\n        android:text=\"Notif\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"@+id/tbrFooter\"\r\n        app:layout_constraintHorizontal_bias=\"0.968\"\r\n        app:layout_constraintStart_toStartOf=\"@+id/tbrFooter\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/btnAdd\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"496dp\"\r\n        android:text=\"+\"\r\n        android:textSize=\"20sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/tbrHeader\" />\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:layout_width=\"409dp\"\r\n        android:layout_height=\"494dp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/tbrFooter\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"1.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/tbrHeader\"\r\n        tools:listitem=\"@layout/recycler_view_item\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_collections_view.xml	(revision 88a657081a9473bf26d8644c12d50d0990670159)
++++ app/src/main/res/layout/activity_collections_view.xml	(date 1622625880419)
+@@ -114,6 +114,7 @@
+         app:layout_constraintTop_toBottomOf="@+id/tbrHeader" />
+ 
+     <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/rcvCollectionList"
+         android:layout_width="409dp"
+         android:layout_height="494dp"
+         app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
+Index: app/src/main/res/layout/activity_item_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_item_list.xml	(date 1622625581805)
++++ app/src/main/res/layout/activity_item_list.xml	(date 1622625581805)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    tools:context=".ItemListActivity">
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/recycler_view_item.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/recycler_view_item.xml	(date 1622625595664)
++++ app/src/main/res/layout/recycler_view_item.xml	(date 1622625595664)
+@@ -0,0 +1,52 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content">
++
++  <ImageView
++      android:id="@+id/imageView2"
++      android:layout_width="50dp"
++      android:layout_height="50dp"
++      tools:src="@tools:sample/avatars"
++      app:layout_constraintStart_toStartOf="parent"
++      android:layout_marginStart="8dp"
++      app:layout_constraintTop_toTopOf="parent"
++      android:layout_marginTop="8dp" />
++
++  <TextView
++      android:id="@+id/textView"
++      android:layout_width="wrap_content"
++      android:layout_height="wrap_content"
++      tools:text="@tools:sample/full_names"
++      android:textSize="20sp"
++      android:textColor="@android:color/black"
++      app:layout_constraintTop_toTopOf="@+id/imageView2"
++      app:layout_constraintStart_toEndOf="@+id/imageView2"
++      android:layout_marginStart="8dp"
++      android:layout_marginBottom="8dp"
++      app:layout_constraintBottom_toTopOf="@+id/textView2" />
++
++  <TextView
++      android:id="@+id/textView2"
++      android:layout_width="285dp"
++      android:layout_height="20dp"
++      tools:text="@tools:sample/lorem[4:10]"
++      app:layout_constraintBottom_toBottomOf="@+id/imageView2"
++      app:layout_constraintStart_toEndOf="@+id/imageView2"
++      android:layout_marginStart="8dp"
++      app:layout_constraintEnd_toEndOf="parent"
++      android:layout_marginEnd="8dp"
++      app:layout_constraintHorizontal_bias="0.050" />
++
++  <TextView
++      android:id="@+id/textView3"
++      android:layout_width="wrap_content"
++      android:layout_height="wrap_content"
++      tools:text="@tools:sample/date/hhmm"
++      app:layout_constraintTop_toTopOf="@+id/imageView2"
++      app:layout_constraintEnd_toEndOf="parent"
++      android:layout_marginEnd="8dp" />
++</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
