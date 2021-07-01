@@ -49,7 +49,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGoal"
-        tools:listitem="@layout/recycler_view_item" />
+        tools:listitem="@layout/activity_item_list_item" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
@@ -131,7 +131,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/btnCollections"
+        android:id="@+id/btnGoals"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginTop="9dp"
@@ -144,7 +144,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnNotif"
+        android:id="@+id/btnSettings"
         android:layout_width="100dp"
         android:layout_height="60dp"
         android:layout_marginTop="2dp"

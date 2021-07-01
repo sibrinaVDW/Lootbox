@@ -33,7 +33,15 @@ class Login : AppCompatActivity() {
         val signIn = findViewById<ImageButton>(R.id.btnSignIn)
 
         signUp.setOnClickListener {
-            createAccount(username.text.toString(), password.text.toString())
+           // createAccount(username.text.toString(), password.text.toString())
+            val intent = Intent(this@Login,NewUserAccount::class.java).apply{}
+            try {
+                startActivity(intent)
+            }
+            catch (ex:Exception){
+                Toast.makeText(this@Login!!,ex.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         signIn.setOnClickListener {

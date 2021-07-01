@@ -96,12 +96,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnCollections"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnGoals"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/collections_quick_button"
+        android:background="@drawable/burgerbar_goals_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.495"
@@ -110,12 +110,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnNotif"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnSettings"
+        android:layout_width="77dp"
+        android:layout_height="63dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/notifications_quick_button"
+        android:background="@drawable/burgerbar_settings_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.942"
@@ -144,6 +144,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/recycler_view_item_1" />
+        tools:listitem="@layout/activity_item_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
