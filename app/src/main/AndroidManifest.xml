@@ -16,7 +16,14 @@
         <activity android:name=".CollectionsView"></activity>
         <activity android:name=".ItemListActivity"></activity>
 
+
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".NewUserAccount" />
+        <activity android:name=".GalleryImage" />
+        <activity android:name=".CollectionsView" />
+        <activity android:name=".ItemListActivity" />
         <activity android:name=".Login">
+        <activity android:name=".ClickedItemActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
