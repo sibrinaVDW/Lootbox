@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="422dp"
-        android:layout_height="520dp"
+        android:layout_width="425dp"
+        android:layout_height="613dp"
         android:background="@drawable/page_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
         android:layout_height="80dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
-        android:hint="something weird"
+        android:hint="Category Name"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:textColor="#000000"
@@ -56,26 +56,26 @@
         app:layout_constraintTop_toBottomOf="@+id/imgThumb" />
 
     <ImageButton
+        android:id="@+id/btnCreate"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/create_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc2" />
+
+    <ImageButton
         android:id="@+id/btnCancel"
         android:layout_width="175dp"
         android:layout_height="50dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnCreate"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc" />
-
-    <ImageButton
-        android:id="@+id/btnCreate"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/create_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc2" />
 
     <EditText
         android:id="@+id/edtCatDesc"
@@ -92,6 +92,22 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtCatName" />
+
+    <EditText
+        android:id="@+id/edtCatDesc2"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/signin_text_box"
+        android:ems="10"
+        android:hint="Category Size"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc" />
 
     <ImageView
         android:id="@+id/imgThumb"
