@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:background="@drawable/page_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +30,9 @@
 
     <EditText
         android:id="@+id/txtEnterGameName"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:hint="Enter Game Name"
@@ -40,14 +40,30 @@
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgGameImage" />
+
+    <EditText
+        android:id="@+id/txtEnterPublishersName"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/signin_text_box"
+        android:ems="10"
+        android:hint="Enter Publisher Name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgGameImage" />
 
     <EditText
         android:id="@+id/txtEnterGameDescription"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
@@ -61,10 +77,10 @@
         app:layout_constraintTop_toBottomOf="@+id/txtEnterGameName" />
 
     <EditText
-        android:id="@+id/EnterDate"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="13dp"
+        android:id="@+id/txtEnterCollectedDate"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:hint="Enter Date (if known)"
@@ -72,6 +88,23 @@
         android:textAlignment="center"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterGameDescription" />
+
+    <EditText
+        android:id="@+id/txtenterReleaseDate"
+        android:layout_width="244dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="144dp"
+        android:background="@drawable/signin_text_box"
+        android:ems="10"
+        android:hint="Enter Release Date (if known)"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEnterGameDescription" />
 
@@ -90,24 +123,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnAddGameToList"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/add_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterDate" />
-
-    <ImageButton
         android:id="@+id/btnCancelAdd"
         android:layout_width="175dp"
         android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/cancel_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterDate" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterCollectedDate" />
+
+    <ImageButton
+        android:id="@+id/btnAddGameToList"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/add_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnterCollectedDate" />
 
     <ImageButton
         android:id="@+id/imgGameImage"
