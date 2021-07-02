@@ -43,18 +43,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnHamburger"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:background="@drawable/burger_quick_button"
-        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="@+id/tbrHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <ImageButton
         android:id="@+id/btnProfile"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -71,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Collections"
+        android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="@+id/tbrHeader"
         app:layout_constraintHorizontal_bias="0.488"

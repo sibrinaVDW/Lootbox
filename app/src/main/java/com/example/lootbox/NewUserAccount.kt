@@ -55,7 +55,9 @@ class NewUserAccount : AppCompatActivity() {
 
         val createAcc: ImageButton = findViewById<ImageButton>(R.id.btnAccountCreate)
         createAcc.setOnClickListener {
-            createAccount(username, email, password, cal.getTime())
+            //createAccount(username, email, password, cal.getTime())
+            val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
+            startActivity(intent)
         }
     }
 

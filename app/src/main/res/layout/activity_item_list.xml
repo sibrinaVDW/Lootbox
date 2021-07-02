@@ -80,10 +80,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
-        android:id="@+id/btnHamburger"
+        android:id="@+id/btnDonut"
         android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:background="@drawable/burger_quick_button"
+        android:layout_height="61dp"
+        android:background="@drawable/circle_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.053"
@@ -165,14 +165,88 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rcvItemList" /><![CDATA[
+        app:layout_constraintTop_toBottomOf="@+id/rcvItemList" />
 
+    <!-- Doughnut chart starts here -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtGoal">
 
+        <!-- ProgressBar that represents a total of 100% -->
+
+        <ImageView
+            android:id="@+id/imgDonutBack"
+            android:layout_width="500dp"
+            android:layout_height="467dp"
+            app:layout_constraintBottom_toBottomOf="@+id/background_donut"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.977"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/background_donut"
+            app:layout_constraintVertical_bias="0.796"
+            app:srcCompat="@drawable/page_background" />
+
+        <ProgressBar
+            android:id="@+id/background_donut"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="100"
+            android:progressDrawable="@drawable/donut_full"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
+
+        <!-- The text that goes in a center of the chart -->
+
+        <ProgressBar
+            android:id="@+id/donut_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="75"
+            android:progressDrawable="@drawable/donut_progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
+        <TextView
+            android:id="@+id/txtCatSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Doughnut chart ends here -->
+
+    <![CDATA[
 
     tools:itemCount = "17"
         tools:listItem="@layout/item_Layout"/>
-
-
 ]]>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

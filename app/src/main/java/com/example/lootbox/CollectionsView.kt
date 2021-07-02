@@ -1,8 +1,6 @@
 package com.example.lootbox
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -12,17 +10,11 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.alpha
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.ByteArrayOutputStream
-import java.io.FileInputStream
-import java.io.IOException
-import kotlin.math.absoluteValue
 
 
 private const val REQUEST_CODE = 42
@@ -33,6 +25,7 @@ class CollectionsView : AppCompatActivity() {
     private var goalList = mutableListOf<String>()
 
     var viewImage: ImageView? = null
+
 
     private val pickImage = 100
     private var imageUri: Uri? = null
@@ -47,6 +40,14 @@ class CollectionsView : AppCompatActivity() {
 
         addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,"Goal: 10")
         addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon, "Goal: 5")
+
+        var btnSettings : ImageButton = findViewById(R.id.btnSettings)
+        btnSettings.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@CollectionsView,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
 
         var showPopUp : ImageButton = findViewById<ImageButton>(R.id.btnAdd)
 
