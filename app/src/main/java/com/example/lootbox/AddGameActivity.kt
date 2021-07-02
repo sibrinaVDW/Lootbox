@@ -12,11 +12,11 @@ class AddGameActivity : AppCompatActivity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_game)
 
-        val itemListActivity = ItemListActivity()
+        //val itemListActivity = ItemListActivity()
     //    itemListActivity.postToItemList("Title","Description",R.mipmap.ic_launcher_round)
 
-        val btnAddToGame : Button = findViewById(R.id.btnAddGame)
-        btnAddToGame.setOnClickListener {
+        //val btnAddToGame : Button = findViewById(R.id.btnAddGame)
+        /*btnAddToGame.setOnClickListener {
 
 
             val gameName : TextView = findViewById(R.id.txtGameName)
@@ -26,11 +26,11 @@ class AddGameActivity : AppCompatActivity()
             val intent = Intent(this, ItemListActivity::class.java).apply {
 
             }
-           itemListActivity.postToItemList(gameName.text.toString(),gameDescription.text.toString(), R.mipmap.ic_launcher_round)
+           //itemListActivity.postToItemList(gameName.text.toString(),gameDescription.text.toString(), R.mipmap.ic_launcher_round)
        //     itemListActivity.postToItemList("Name","Description",R.mipmap.ic_launcher_round)
             startActivity(intent)
 
-        }
+        }*/
 
 
 

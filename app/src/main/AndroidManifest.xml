@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".Goals" />
-        <activity android:name=".GalleryImage" /> <!-- <activity android:name=".CollectionsView"></activity> -->
+      
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".NewUserAccount" />
+        <activity android:name=".GalleryImage" />
+        <activity android:name=".CollectionsView" />
         <activity android:name=".ItemListActivity" />
-        <activity android:name=".CollectionsView">
+        <activity android:name=".Login">
+        <activity android:name=".ClickedItemActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -13,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
 
-class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goal: List<Int>) :
+public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goals : List<String>) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
-        val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
-        val itemDesc: TextView = itemView.findViewById(R.id.txtDescription)
-        val itemThumbnail : ImageView = itemView.findViewById(R.id.imgThumbnail)
+        public val itemTitle: TextView = itemView.findViewById(R.id.txtTitle)
+        public val itemDesc: TextView = itemView.findViewById(R.id.txtDescription)
+        public val itemThumbnail : ImageView = itemView.findViewById(R.id.imgThumbnail)
+        public val itemGoalDisp : TextView = itemView.findViewById(R.id.txtDate)
+
         var itemGoal : Int = 0
         //store in list, view list
         init {
@@ -29,8 +31,6 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                 intent.putExtra("Goal",itemGoal)
                 intent.putExtra("Category", itemTitle.text)
                 v?.context.startActivity(intent)
-
-                Toast.makeText(itemView.context,"You clicked on item number ${pos+1}",Toast.LENGTH_SHORT).show()
             }
 
 
@@ -52,20 +52,20 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
             return when (item.itemId) {
                 R.id.btnGoalAdd -> {
                             val diagView = LayoutInflater.from(this@ViewHolder.itemView.context).inflate(R.layout.new_goal_pop,null)
-                            val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Create category")
+                            val alertBuild = AlertDialog.Builder(this@ViewHolder.itemView.context).setView(diagView).setTitle("Set Goal")
                             val alertDiag = alertBuild.show()
 
-                            var create : Button = diagView.findViewById<Button>(R.id.btnGoalCreate)
+                            var create : ImageButton = diagView.findViewById<ImageButton>(R.id.btnGoalCreate)
                             create.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
                                     val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text.toString()
                                     itemGoal = parseInt(goalNum)
-                                    itemDesc.text = "You need to create $goalNum items for this category"
+                                    itemGoalDisp.text = "You need to create $goalNum items for this category"
                                     alertDiag.dismiss()
                                 }
                             })
 
-                            var cancel : Button = diagView.findViewById<Button>(R.id.btnGoalCancel)
+                            var cancel : ImageButton = diagView.findViewById<ImageButton>(R.id.btnGoalCancel)
                             cancel.setOnClickListener(object : View.OnClickListener {
                                 override fun onClick(v: View?) {
                                     alertDiag.dismiss()
@@ -100,9 +100,12 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         holder.itemTitle.text = title[position]
         holder.itemDesc.text = details[position]
         holder.itemThumbnail.setImageResource(images[position])
+        holder.itemGoalDisp.text = goals[position]
     }
 
     override fun getItemCount(): Int {
         return title.size
     }
+
+
 }

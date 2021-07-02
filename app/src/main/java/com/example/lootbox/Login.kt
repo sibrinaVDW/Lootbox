@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -31,7 +33,9 @@ class Login : AppCompatActivity() {
         val signIn = findViewById<ImageButton>(R.id.btnSignIn)
 
         signUp.setOnClickListener {
-            createAccount(username.text.toString(), password.text.toString())
+           // createAccount(username.text.toString(), password.text.toString())
+            val intent = Intent(this@Login,NewUserAccount::class.java).apply{}
+            startActivity(intent)
         }
 
         signIn.setOnClickListener {
