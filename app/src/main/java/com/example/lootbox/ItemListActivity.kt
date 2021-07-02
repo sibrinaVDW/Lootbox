@@ -115,7 +115,7 @@ class ItemListActivity : AppCompatActivity() {
                 val diagPopUp = LayoutInflater.from(this@ItemListActivity).inflate(R.layout.itempopup,null)
                 val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(diagPopUp).setTitle("Add Game")
                 val alertDialog = alertBuilder.show()
-                dateDisp = diagPopUp.findViewById(R.id.EnterDate)
+                dateDisp = diagPopUp.findViewById(R.id.txtEnterCollectedDate)
 
                 val takeAPicture = diagPopUp.findViewById<ImageButton>(R.id.imgGameImage)
 
@@ -139,7 +139,7 @@ class ItemListActivity : AppCompatActivity() {
                     }
                 }
 
-                val chooseDate = diagPopUp.findViewById<TextView>(R.id.EnterDate)
+                val chooseDate = diagPopUp.findViewById<TextView>(R.id.txtEnterCollectedDate)
                 chooseDate.setOnClickListener(object : View.OnClickListener  {
                     override fun onClick(view: View) {
                         DatePickerDialog(this@ItemListActivity,
