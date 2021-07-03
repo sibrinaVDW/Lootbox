@@ -44,19 +44,18 @@ class ItemListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
-        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
-        addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+
+        for (i in 1..50) {
+            addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+            addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+        }
+
 
         donutPanel = findViewById(R.id.imgDonutBack)
         donutBack  = findViewById(R.id.background_donut)
         donutProg  = findViewById(R.id.donut_progressbar)
         progText  = findViewById(R.id.txtCatSize)
 
-        /*donutPanel!!.visibility = View.GONE
-        donutBack!!.visibility = View.GONE
-        donutProg!!.visibility = View.GONE
-        progText!!.visibility = View.GONE*/
-        DisplayChart()
         donutOpen = true;
 
         val intent = intent
