@@ -12,13 +12,16 @@ import android.widget.ImageButton
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Login : AppCompatActivity() {
-    private var mAuth: FirebaseAuth? = null
+    private  var mAuth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance();
+        val db = FirebaseFirestore.getInstance()
+        var washingtonRef = db.collection("cities");
     }
     override fun onStart() {
         super.onStart()
@@ -27,6 +30,7 @@ class Login : AppCompatActivity() {
         if(currentUser != null){
             Log.d(TAG, currentUser.displayName.toString())
         }
+
         val signUp = findViewById<Button>(R.id.btnSignUp)
         val username = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
@@ -40,6 +44,16 @@ class Login : AppCompatActivity() {
 
         signIn.setOnClickListener {
             login(username.text.toString(), password.text.toString())
+            val db = FirebaseFirestore.getInstance()
+            val user: MutableMap<String, Any> = HashMap()
+            db.collection("users")
+                .add(user)
+                .addOnSuccessListener {
+                    Toast.makeText(this@Login, "record added successfully ", Toast.LENGTH_SHORT ).show()
+                }
+                .addOnFailureListener{
+                    Toast.makeText(this@Login, "record Failed to add ", Toast.LENGTH_SHORT ).show()
+                }
         }
     }
 
