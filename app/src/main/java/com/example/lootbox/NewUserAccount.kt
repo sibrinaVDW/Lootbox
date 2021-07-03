@@ -74,6 +74,8 @@ class NewUserAccount : AppCompatActivity() {
                     Toast.makeText(baseContext, "User created successfully",
                         Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
+                    intent.putExtra("user", user);
+
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.

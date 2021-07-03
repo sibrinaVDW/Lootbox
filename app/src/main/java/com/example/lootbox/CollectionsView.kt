@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 private const val REQUEST_CODE = 42
@@ -29,10 +31,14 @@ class CollectionsView : AppCompatActivity() {
 
     private val pickImage = 100
     private var imageUri: Uri? = null
+    private var data = " "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collections_view)
+
+        val intent: Intent = intent
+        data = intent.getStringExtra("user").toString()
 
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
@@ -101,6 +107,17 @@ class CollectionsView : AppCompatActivity() {
         descList.add(desc)
         imagesList.add(image)
         goalList.add(goal)
+
+        val db = FirebaseFirestore.getInstance()
+        val user = hashMapOf(
+            "tilte" to title,
+            "desc" to desc,
+            "image" to image,
+            "goal" to goal,
+
+        )
+        db.collection(data)
+            .document("categories").collection(title).add(user)
     }
 
 
