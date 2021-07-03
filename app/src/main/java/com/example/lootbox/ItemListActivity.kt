@@ -1,5 +1,6 @@
 package com.example.lootbox
 
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -33,11 +34,15 @@ class ItemListActivity : AppCompatActivity() {
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
         addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
         addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+
+
+
 
         val intent = intent
         goalAmount = intent.getIntExtra("Goal",0)
@@ -52,6 +57,14 @@ class ItemListActivity : AppCompatActivity() {
         goalIndic.text = "You have $numItems out of $goalAmount items collected"
         var catDisp : TextView =  findViewById(R.id.txtCatName)
         catDisp.text = categoryPass
+        //progress bar
+        val pb = findViewById<ProgressBar>(R.id.pb)
+
+        pb.max = 100;
+        val currentProgress = 70;
+        ObjectAnimator.ofInt(pb,"Progress",currentProgress)
+            .setDuration(2000)
+            .start()
 
         val btnAdd : ImageButton = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
