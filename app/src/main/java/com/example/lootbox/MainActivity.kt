@@ -55,22 +55,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-
-  /*  private var filePath: Uri? = null
-
-    //Firebase
-    var strorage: FirebaseStorage? = null
-    var storageReference: StorageReference?= null
-    var db: FirebaseFirestore? = FirebaseFirestore.getInstance()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        //Initialize Views
-        val takeAPicture = findViewById<Button>(R.id.btnTakePicture)
-
-
-    }
-}*/

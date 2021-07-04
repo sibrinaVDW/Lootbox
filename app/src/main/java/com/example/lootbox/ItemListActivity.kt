@@ -51,7 +51,7 @@ class ItemListActivity : AppCompatActivity() {
         addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
 
 
-        var data = intent.getStringExtra("user")
+       // var data = intent.getStringExtra("user")
 
         donutPanel = findViewById(R.id.imgDonutBack)
         donutBack  = findViewById(R.id.background_donut)
