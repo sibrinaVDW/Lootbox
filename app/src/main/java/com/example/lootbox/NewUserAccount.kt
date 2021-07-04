@@ -20,7 +20,6 @@ class NewUserAccount : AppCompatActivity() {
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
     var dateDisp : TextView? = null
-    //val db= FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,20 +52,6 @@ class NewUserAccount : AppCompatActivity() {
                     cal.get(Calendar.DAY_OF_MONTH)).show()
             }
         })
-
-        /*val user=hashMapOff(
-            "first" to username,
-            "email" to email
-            "password" to "password"
-            "born" to dateofBirth
-        )
-//Adding a new document with generated ID
-        db.collection("users").add(user).addOnSuccessListener { documentReference ->
-            Log.w(TAG,"DocumentSnapshot added with ID:${documentReference.id}")
-        }
-            .addOnFailureListener{e ->
-                Log.w(TAG,"Error adding document",e)
-            }*/
 
 
         val createAcc: ImageButton = findViewById<ImageButton>(R.id.btnAccountCreate)
