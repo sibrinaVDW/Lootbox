@@ -20,11 +20,15 @@ class NewUserAccount : AppCompatActivity() {
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
     var dateDisp : TextView? = null
+    private var data = " "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_user_account)
         mAuth = FirebaseAuth.getInstance();
+
+       // val intent: Intent = intent
+      //  data = intent.getStringExtra("user").toString()
 
         val username : String = findViewById<EditText>(R.id.edtName).text.toString()
         val password : String = findViewById<EditText>(R.id.edtPassword).text.toString()
@@ -56,32 +60,52 @@ class NewUserAccount : AppCompatActivity() {
 
         val createAcc: ImageButton = findViewById<ImageButton>(R.id.btnAccountCreate)
         createAcc.setOnClickListener {
-            //createAccount(username, email, password, cal.getTime())
+            createAccount(email, password)
             val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
             startActivity(intent)
         }
     }
 
-    private fun createAccount(username: String, email: String, password: String, dob: Date) {
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if( currentUser != null )
+        {
+            val db = FirebaseFirestore.getInstance()
+            val user = hashMapOf(
+                "email" to currentUser?.email,
+                "UID" to currentUser?.uid
+            )
+            db.collection(currentUser!!.uid)
+                .document("details").set(user)
+        }else
+        {
+            Toast.makeText(baseContext, "User is NULL",
+                Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun createAccount(email: String, password: String) {
         //Need to add to database
 
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this@NewUserAccount) { task ->
+
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth!!.currentUser
-                    //updateUI(user)
+                    updateUI(user)
                     Toast.makeText(baseContext, "User created successfully",
                         Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
+                   // intent.putExtra("user", user?.uid.toString())
+
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
+                    updateUI(null)
                 }
             }
     }
