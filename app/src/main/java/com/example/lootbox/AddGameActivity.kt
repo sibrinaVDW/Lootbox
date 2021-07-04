@@ -11,7 +11,7 @@ class AddGameActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_game)
+        //setContentView(R.layout.login)
 
         //val itemListActivity = ItemListActivity()
     //    itemListActivity.postToItemList("Title","Description",R.mipmap.ic_launcher_round)
