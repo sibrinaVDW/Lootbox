@@ -20,7 +20,7 @@ class NewUserAccount : AppCompatActivity() {
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
     var dateDisp : TextView? = null
-    val db= FirebaseFirestore.getInstance()
+    //val db= FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
