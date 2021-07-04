@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,6 +42,8 @@ class ItemListActivity : AppCompatActivity() {
     var donutProg : ProgressBar? = null
     var progText : TextView? = null
 
+    private var data = " "
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
@@ -51,6 +54,9 @@ class ItemListActivity : AppCompatActivity() {
         }
 
 
+
+       // var data = intent.getStringExtra("user")
+
         donutPanel = findViewById(R.id.imgDonutBack)
         donutBack  = findViewById(R.id.background_donut)
         donutProg  = findViewById(R.id.donut_progressbar)
@@ -59,6 +65,7 @@ class ItemListActivity : AppCompatActivity() {
         donutOpen = true;
 
         val intent = intent
+        data = intent.getStringExtra("user").toString()
         goalAmount = intent.getIntExtra("Goal",0)
         categoryPass = intent.getStringExtra("Category")
 
@@ -178,6 +185,18 @@ class ItemListActivity : AppCompatActivity() {
         descriptionList.add(description)
         imageList.add(image)
         dateList.add(date)
+
+
+        val db = FirebaseFirestore.getInstance()
+        val user = hashMapOf(
+            "tilte" to title,
+            "description" to description,
+            "image" to image,
+            "date" to date,
+
+            )
+        db.collection(data)
+            .document("items").collection(categoryPass!!).add(user)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
