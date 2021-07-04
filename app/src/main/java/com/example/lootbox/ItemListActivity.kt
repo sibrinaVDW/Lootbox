@@ -47,8 +47,12 @@ class ItemListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
-        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
-        addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+
+        for (i in 1..50) {
+            addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+            addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+        }
+
 
 
        // var data = intent.getStringExtra("user")
@@ -58,11 +62,6 @@ class ItemListActivity : AppCompatActivity() {
         donutProg  = findViewById(R.id.donut_progressbar)
         progText  = findViewById(R.id.txtCatSize)
 
-        /*donutPanel!!.visibility = View.GONE
-        donutBack!!.visibility = View.GONE
-        donutProg!!.visibility = View.GONE
-        progText!!.visibility = View.GONE*/
-        DisplayChart()
         donutOpen = true;
 
         val intent = intent
@@ -94,16 +93,14 @@ class ItemListActivity : AppCompatActivity() {
                 if(donutOpen == false){
                     DisplayChart()
                     donutPanel!!.visibility = View.VISIBLE
-                    //donutBack!!.visibility = View.VISIBLE
-                    //donutProg!!.visibility = View.VISIBLE
-                    runOnUiThread {
+                    donutProg!!.visibility = View.VISIBLE
+                    donutBack!!.visibility = View.VISIBLE
+                    /*runOnUiThread {
 
                         donutProg!!.visibility = View.VISIBLE
                         donutBack!!.visibility = View.VISIBLE
-                    }
-                    //donutBack!!.setVisibility(View.VISIBLE);
+                    }*/
                     progText!!.visibility = View.VISIBLE
-                    //DisplayChart()
                     donutOpen = true
                 }
                 else{
@@ -213,15 +210,16 @@ class ItemListActivity : AppCompatActivity() {
 
     fun DisplayChart() {
         // Update the text in a center of the chart:
-        //val numberOfItems = findViewById<TextView>(R.id.txtCatSize)
         progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize)
-        //numberOfItems.setText(Integer.toString(numItems)+ " / " + Integer.toString(catSize))
-        //numberOfItems.text = numItems.toString() + "/" + catSize.toString()
-
 
         // Calculate the slice size and update the pie chart:
-        val d = numItems.toDouble() / catSize
-        val progress = (d * 1000).toInt()
+        val d = numItems.toDouble() / catSize.toDouble()
+        //d = 99.toDouble()/catSize
+        val progress = (d * 100).toInt()
+        Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
+        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d).toString() + "% collected.")
+        donutBack!!.max = catSize
+        donutBack!!.progress = catSize
         donutProg!!.progress = progress
     }
 
