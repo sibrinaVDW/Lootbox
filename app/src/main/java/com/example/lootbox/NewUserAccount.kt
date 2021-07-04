@@ -66,6 +66,23 @@ class NewUserAccount : AppCompatActivity() {
         }
     }
 
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if( currentUser != null )
+        {
+            val db = FirebaseFirestore.getInstance()
+            val user = hashMapOf(
+                "email" to currentUser?.email,
+                "UID" to currentUser?.uid
+            )
+            db.collection(currentUser!!.uid)
+                .document("details").set(user)
+        }else
+        {
+            Toast.makeText(baseContext, "User is NULL",
+                Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun createAccount(email: String, password: String) {
         //Need to add to database
 
@@ -76,7 +93,7 @@ class NewUserAccount : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth!!.currentUser
-                    //updateUI(user)
+                    updateUI(user)
                     Toast.makeText(baseContext, "User created successfully",
                         Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
@@ -88,7 +105,7 @@ class NewUserAccount : AppCompatActivity() {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
+                    updateUI(null)
                 }
             }
     }
