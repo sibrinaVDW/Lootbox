@@ -1,3 +1,4 @@
+
 package com.example.lootbox
 
 import android.content.Intent
@@ -17,7 +18,6 @@ class AddGameActivity : AppCompatActivity()
 
         //val btnAddToGame : Button = findViewById(R.id.btnAddGame)
         /*btnAddToGame.setOnClickListener {
-
 
             val gameName : TextView = findViewById(R.id.txtGameName)
             val gameDescription : TextView = findViewById(R.id.txtGameDescription)

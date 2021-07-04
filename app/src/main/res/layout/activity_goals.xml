@@ -43,6 +43,18 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
+        android:id="@+id/btnHamburger"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/burger_quick_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toStartOf="@+id/tbrHeader"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.423" />
+
+    <ImageButton
         android:id="@+id/btnProfile"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -58,10 +70,10 @@
         android:id="@+id/txtPgTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Collections"
-        android:textColor="@color/white"
+        android:text="Goals"
         android:textSize="35dp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
         app:layout_constraintEnd_toEndOf="@+id/tbrHeader"
         app:layout_constraintHorizontal_bias="0.488"
@@ -84,12 +96,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnGoals"
-        android:layout_width="66dp"
-        android:layout_height="66dp"
+        android:id="@+id/btnCollections"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/burgerbar_goals_icon"
+        android:background="@drawable/collections_quick_button"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.495"
@@ -98,12 +110,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnSettings"
-        android:layout_width="77dp"
-        android:layout_height="63dp"
+        android:id="@+id/btnNotif"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/burgerbar_settings_icon"
+        android:background="@drawable/notifications_quick_button"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.942"
@@ -112,7 +124,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnAdd"
+        android:id="@+id/btnAddGoal"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="12dp"
@@ -123,15 +135,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvCategoryList"
+        android:id="@+id/rcvGoalsList"
         android:layout_width="405dp"
         android:layout_height="461dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddGoal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/activity_item_list_item" />
+        tools:listitem="@layout/recycler_view_item_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
