@@ -29,6 +29,7 @@ class ItemListActivity : AppCompatActivity() {
 
     var viewImage :  ImageButton? = null
     var numItems : Int = 0
+    var itemsGathered : Int = 0
     private var goalAmount :Int = 0
     private var categoryPass : String? = ""
     private var catSize :Int = 1000
@@ -48,14 +49,16 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
 
-        for (i in 1..50) {
+        /*for (i in 1..50) {
             addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
             addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
-        }
+        }*/
+        val intent = intent
+        data = intent.getStringExtra("user").toString()
+        goalAmount = intent.getIntExtra("Goal",0)
+        categoryPass = intent.getStringExtra("Category")
+        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
 
-
-
-       // var data = intent.getStringExtra("user")
 
         donutPanel = findViewById(R.id.imgDonutBack)
         donutBack  = findViewById(R.id.background_donut)
@@ -64,25 +67,43 @@ class ItemListActivity : AppCompatActivity() {
 
         donutOpen = true;
 
-        val intent = intent
-        data = intent.getStringExtra("user").toString()
-        goalAmount = intent.getIntExtra("Goal",0)
-        categoryPass = intent.getStringExtra("Category")
-
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
-        numItems = rcvItemList?.adapter!!.itemCount
+        numItems = rcvItemList?.adapter!!.itemCount 
 
         var goalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
         goalIndic.text = "You have $numItems out of $goalAmount items collected"
         var catDisp : TextView =  findViewById(R.id.txtCatName)
         catDisp.text = categoryPass
 
+        if(itemsGathered == goalAmount)
+        {
+            //goal achieved, add to DB, do popup, do prompt 4 new goal
+                var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
+            val db = FirebaseFirestore.getInstance()
+            val user = hashMapOf(
+                "tilte" to goalTitle,
+                "category" to categoryPass,
+                "status" to "Complete",
+            )
+            db.collection(data)
+                .document("goals").collection(goalTitle).add(user)
+        }
+
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
         btnSettings.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(this@ItemListActivity,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,Profile::class.java).apply{}
+                intent.putExtra("user", data)
                 startActivity(intent)
             }
         })
@@ -95,11 +116,6 @@ class ItemListActivity : AppCompatActivity() {
                     donutPanel!!.visibility = View.VISIBLE
                     donutProg!!.visibility = View.VISIBLE
                     donutBack!!.visibility = View.VISIBLE
-                    /*runOnUiThread {
-
-                        donutProg!!.visibility = View.VISIBLE
-                        donutBack!!.visibility = View.VISIBLE
-                    }*/
                     progText!!.visibility = View.VISIBLE
                     donutOpen = true
                 }
@@ -164,7 +180,8 @@ class ItemListActivity : AppCompatActivity() {
                         rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
                         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
                         numItems = rcvItemList?.adapter!!.itemCount
-                        goalIndic.text = "You have $numItems out of $goalAmount items collected"
+                        itemsGathered++
+                        goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
                         alertDialog.dismiss()
                     }
                 })
@@ -186,17 +203,15 @@ class ItemListActivity : AppCompatActivity() {
         imageList.add(image)
         dateList.add(date)
 
-
         val db = FirebaseFirestore.getInstance()
         val user = hashMapOf(
             "tilte" to title,
             "description" to description,
             "image" to image,
             "date" to date,
-
             )
         db.collection(data)
-            .document("items").collection(categoryPass!!).add(user)
+            .document("categories").collection(categoryPass!!).document("items").collection(title).document("itemInfo").set(user)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

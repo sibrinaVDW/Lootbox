@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
 
-public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goals : List<String>) :
+public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goals : List<String>, private var dbData : String) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
@@ -30,6 +30,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                 val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
                 intent.putExtra("Goal",itemGoal)
                 intent.putExtra("Category", itemTitle.text)
+                intent.putExtra("user", dbData)
                 v?.context.startActivity(intent)
             }
 
