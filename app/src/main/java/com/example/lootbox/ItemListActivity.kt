@@ -67,9 +67,6 @@ class ItemListActivity : AppCompatActivity() {
 
         donutOpen = true;
 
-
-
-
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
@@ -83,12 +80,30 @@ class ItemListActivity : AppCompatActivity() {
         if(itemsGathered == goalAmount)
         {
             //goal achieved, add to DB, do popup, do prompt 4 new goal
+                var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
+            val db = FirebaseFirestore.getInstance()
+            val user = hashMapOf(
+                "tilte" to goalTitle,
+                "category" to categoryPass,
+                "status" to "Complete",
+            )
+            db.collection(data)
+                .document("goals").collection(goalTitle).add(user)
         }
 
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
         btnSettings.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(this@ItemListActivity,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,Profile::class.java).apply{}
+                intent.putExtra("user", data)
                 startActivity(intent)
             }
         })
@@ -165,7 +180,8 @@ class ItemListActivity : AppCompatActivity() {
                         rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
                         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
                         numItems = rcvItemList?.adapter!!.itemCount
-                        goalIndic.text = "You have $numItems out of $goalAmount items collected"
+                        itemsGathered++
+                        goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
                         alertDialog.dismiss()
                     }
                 })
