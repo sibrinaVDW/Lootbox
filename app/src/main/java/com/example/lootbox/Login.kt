@@ -68,6 +68,12 @@ class Login : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
+
+        /*val catView = hashMapOf(
+            "existing" to "",
+            "numCats" to 0
+        )
+        db.collection((currentUser!!.uid)).document("categories").set(catView)*/
     }
 
     private fun login(email: String, password: String)
