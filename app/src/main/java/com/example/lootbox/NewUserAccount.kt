@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
+const val DEFVALS = "com.example.googleloginlogout.MESSAGE";
+
 class NewUserAccount : AppCompatActivity() {
     private var mAuth: FirebaseAuth? = null
     var cal = Calendar.getInstance()
@@ -25,14 +27,11 @@ class NewUserAccount : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_user_account)
+
         mAuth = FirebaseAuth.getInstance();
+        val db = FirebaseFirestore.getInstance()
+        data = intent.getStringExtra("user").toString()
 
-       // val intent: Intent = intent
-      //  data = intent.getStringExtra("user").toString()
-
-        val username : String = findViewById<EditText>(R.id.edtName).text.toString()
-        val password : String = findViewById<EditText>(R.id.edtPassword).text.toString()
-        val email : String = findViewById<EditText>(R.id.edtEmail).text.toString()
 
 
         dateDisp = findViewById(R.id.edtDOB)
@@ -56,57 +55,51 @@ class NewUserAccount : AppCompatActivity() {
                     cal.get(Calendar.DAY_OF_MONTH)).show()
             }
         })
+    }
 
 
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val password = findViewById<EditText>(R.id.edtPassword)
+        val email = findViewById<EditText>(R.id.edtEmail)
         val createAcc: ImageButton = findViewById<ImageButton>(R.id.btnAccountCreate)
+        val name  = findViewById<EditText>(R.id.edtName)
+
         createAcc.setOnClickListener {
-            createAccount(email, password)
+            createAccount(email.text.toString(), password.text.toString()) //name.text.toString()
             val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
             startActivity(intent)
         }
     }
 
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if( currentUser != null )
-        {
-            val db = FirebaseFirestore.getInstance()
-            val user = hashMapOf(
-                "email" to currentUser?.email,
-                "UID" to currentUser?.uid
-            )
-            db.collection(currentUser!!.uid)
-                .document("details").set(user)
-        }else
-        {
-            Toast.makeText(baseContext, "User is NULL",
-                Toast.LENGTH_SHORT).show()
-        }
-    }
+   //private fun updateUI(currentUser: FirebaseUser?) {
+
 
     private fun createAccount(email: String, password: String) {
-        //Need to add to database
-
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this@NewUserAccount) { task ->
-
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth!!.currentUser
-                    updateUI(user)
-                    Toast.makeText(baseContext, "User created successfully",
-                        Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
-                   // intent.putExtra("user", user?.uid.toString())
 
-                    startActivity(intent)
+                    val db = FirebaseFirestore.getInstance()
+                    val userS = hashMapOf(
+                        "email" to user?.email,
+                        "UID" to user?.uid
+                    )
+                    db.collection((user?.uid)as String)
+                        .document("details").set(userS)
+                   //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
-                    updateUI(null)
+                   // updateUI(null)
                 }
             }
     }
+    //updateUI(user)
 }
