@@ -60,8 +60,8 @@ class ItemListActivity : AppCompatActivity() {
         //progress bar
         val pb = findViewById<ProgressBar>(R.id.pb)
 
-        pb.max = 100;
-        val currentProgress = 70;
+        pb.max = goalAmount;
+        val currentProgress = numItems;
         ObjectAnimator.ofInt(pb,"Progress",currentProgress)
             .setDuration(2000)
             .start()
