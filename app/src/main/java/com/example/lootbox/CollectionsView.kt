@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,6 +33,7 @@ class CollectionsView : AppCompatActivity() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     private var data = " "
+    var catSize: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +44,26 @@ class CollectionsView : AppCompatActivity() {
 
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
-        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
+        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
+
 
         addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,"Goal: 10")
         addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon, "Goal: 5")
+        //getFromDB()
 
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
         btnSettings.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(this@CollectionsView,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@CollectionsView,Profile::class.java).apply{}
+                intent.putExtra("user", data)
                 startActivity(intent)
             }
         })
@@ -77,9 +90,10 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-                        addToList(catName,catDesc,R.drawable.launcher_icon,"Goal: 0")
+                        catSize = Integer.parseInt(diagView.findViewById<EditText>(R.id.edtCatSize).text.toString())
+                        addToList(catName,catDesc,R.drawable.launcher_icon,"0")
                         recView.layoutManager = LinearLayoutManager(this@CollectionsView)
-                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
+                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
                         alertDiag.dismiss()
                     }
                 })
@@ -102,6 +116,33 @@ class CollectionsView : AppCompatActivity() {
         }
     }
 
+    private fun getFromDB(){
+        var title : String = ""
+        var desc : String = ""
+        var image : Int = 0
+        var goal : String = ""
+
+        val db = FirebaseFirestore.getInstance()
+        //var fieldValue = FirebaseFirestore.FieldValue;
+        val docRef = db.collection(data).document("categories")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
+
+        titlesList.add(title)
+        descList.add(desc)
+        imagesList.add(image)
+        goalList.add(goal)
+    }
+
     private fun addToList(title: String, desc: String , image: Int, goal : String){
         titlesList.add(title)
         descList.add(desc)
@@ -114,10 +155,13 @@ class CollectionsView : AppCompatActivity() {
             "desc" to desc,
             "image" to image,
             "goal" to goal,
-
+            "size" to catSize
         )
         db.collection(data)
-            .document("categories").collection(title).add(user)
+            .document("categories").collection(title).document("info").set(user)
+
+        //val
+
     }
 
 

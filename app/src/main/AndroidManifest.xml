@@ -15,7 +15,7 @@
         <activity android:name=".GalleryImage"></activity>
         <activity android:name=".CollectionsView"></activity>
         <activity android:name=".ItemListActivity"></activity>
-
+        <activity android:name=".Profile"></activity>
 
         <activity android:name=".Settings"></activity>
         <activity android:name=".NewUserAccount"/>
