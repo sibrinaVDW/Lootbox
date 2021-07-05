@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClickedItemActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbrHeader"
+        android:layout_width="414dp"
+        android:layout_height="107dp"
+        android:background="@drawable/header_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/btnProfile"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:background="@drawable/profile_quick_button"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.978"
+        app:layout_constraintStart_toStartOf="@+id/tbrHeader"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.423" />
+
+    <TextView
+        android:id="@+id/txtPgTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Game Info"
+        android:textColor="@color/white"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
+        app:layout_constraintEnd_toEndOf="@+id/tbrHeader"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <ImageView
+        android:id="@+id/imgCoverImage"
+        android:layout_width="419dp"
+        android:layout_height="278dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
+        app:srcCompat="@drawable/gtacover" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbrBackgroundww"
+        android:layout_width="315dp"
+        android:layout_height="460dp"
+        android:background="@drawable/header_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.981" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="224dp"
+        android:text="GTA V "
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.747"
+        app:layout_constraintStart_toStartOf="@+id/imgCoverImage"
+        app:layout_constraintTop_toTopOf="@+id/imgCoverImage" />
+
+    <ImageView
+        android:id="@+id/imgGameCoverDisplay"
+        android:layout_width="145dp"
+        android:layout_height="235dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
+        app:srcCompat="@drawable/gta" />
+
+    <TextView
+        android:id="@+id/lblGameDescription"
+        android:layout_width="262dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="36dp"
+        android:text="Game Description: Grand Theft Auto V is a 2013 action-adventure game developed by Rockstar North and published by Rockstar Games. It is the first main entry in the Grand Theft Auto series since 2008's Grand Theft Auto IV."
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/tbrBackgroundww"
+        app:layout_constraintTop_toBottomOf="@+id/imgGameCoverDisplay" />
+
+    <TextView
+        android:id="@+id/lblReleaseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="36dp"
+        android:text="Release Date : 17 September 2013"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp"
+        app:layout_constraintEnd_toEndOf="@+id/tbrBackgroundww"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/lblPublisher"
+        android:layout_width="289dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Publisher: Rockstar Games"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/tbrBackgroundww"
+        app:layout_constraintTop_toBottomOf="@+id/lblGameDescription" />
+
+    <TextView
+        android:id="@+id/lblDateCollected"
+        android:layout_width="283dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Date Collected: 22 June 2021"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="@+id/tbrBackgroundww"
+        app:layout_constraintTop_toBottomOf="@+id/lblPublisher" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
