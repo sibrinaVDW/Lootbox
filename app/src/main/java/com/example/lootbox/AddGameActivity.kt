@@ -1,3 +1,4 @@
+
 package com.example.lootbox
 
 import android.content.Intent
@@ -10,14 +11,13 @@ class AddGameActivity : AppCompatActivity()
 {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_game)
+       // setContentView(R.layout.activity_add_game)
 
         //val itemListActivity = ItemListActivity()
     //    itemListActivity.postToItemList("Title","Description",R.mipmap.ic_launcher_round)
 
         //val btnAddToGame : Button = findViewById(R.id.btnAddGame)
         /*btnAddToGame.setOnClickListener {
-
 
             val gameName : TextView = findViewById(R.id.txtGameName)
             val gameDescription : TextView = findViewById(R.id.txtGameDescription)
