@@ -91,14 +91,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
-        android:layout_width="603dp"
-        android:layout_height="255dp"
+        android:layout_width="627dp"
+        android:layout_height="261dp"
         android:background="@drawable/signin_header"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -109,14 +108,14 @@
         android:layout_height="80dp"
         android:background="@android:color/transparent"
         android:text="Sign Up"
-        android:textSize="20sp"
         android:textColor="@drawable/button_text_color"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintHorizontal_bias="0.832"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.91" />
+        app:layout_constraintVertical_bias="0.909" />
 
     <ImageButton
         android:id="@+id/btnSignIn"

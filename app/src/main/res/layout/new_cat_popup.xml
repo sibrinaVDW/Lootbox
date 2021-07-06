@@ -8,116 +8,131 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="425dp"
-        android:layout_height="613dp"
+        android:layout_width="428dp"
+        android:layout_height="759dp"
         android:background="@drawable/page_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="457dp"
-        android:layout_height="108dp"
+        android:layout_width="456dp"
+        android:layout_height="104dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/popup_header"
-        app:layout_constraintBottom_toTopOf="@+id/imgThumb"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/txtCatCreateTitle"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtCatCreateTitle"
-        android:layout_width="295dp"
-        android:layout_height="55dp"
+        android:layout_width="397dp"
+        android:layout_height="64dp"
         android:text="Create Category"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="45dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <EditText
-        android:id="@+id/edtCatName"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:background="@drawable/signin_text_box"
-        android:ems="10"
-        android:hint="Category Name"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000000"
+    <ImageView
+        android:id="@+id/imgThumb"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@drawable/gallery_add_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgThumb" />
-
-    <ImageButton
-        android:id="@+id/btnCreate"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/create_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc2" />
-
-    <ImageButton
-        android:id="@+id/btnCancel"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/cancel_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnCreate"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc2" />
-
-    <EditText
-        android:id="@+id/edtCatDesc"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/signin_text_box"
-        android:ems="10"
-        android:hint="Category Description"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatName" />
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.215" />
 
     <EditText
         android:id="@+id/edtCatDesc2"
         android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="75dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
-        android:hint="Category Size"
         android:inputType="textPersonName"
+        android:text="Category Size"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCatDesc" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.739" />
 
-    <ImageView
-        android:id="@+id/imgThumb"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/gallery_add_icon"
+    <EditText
+        android:id="@+id/edtCatName"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/signin_text_box"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Category Name"
+        android:textAlignment="center"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCatCreateTitle" />
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <ImageButton
+        android:id="@+id/btnCancel"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:background="@drawable/cancel_button"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.936"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84" />
+
+    <ImageButton
+        android:id="@+id/btnCreate"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
+        android:background="@drawable/create_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.86" />
+
+    <EditText
+        android:id="@+id/edtCatDesc"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
+        android:background="@drawable/signin_text_box"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Category Description"
+        android:textAlignment="center"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

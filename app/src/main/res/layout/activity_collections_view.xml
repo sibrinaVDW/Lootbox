@@ -8,27 +8,30 @@
     tools:context=".CollectionsView">
 
     <ImageView
+        android:id="@+id/imageView12"
         android:layout_width="450dp"
         android:layout_height="750dp"
         android:background="@drawable/page_background"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
-        android:layout_width="414dp"
-        android:layout_height="107dp"
+        android:layout_width="450dp"
+        android:layout_height="109dp"
         android:background="@drawable/header_background"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.015" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrFooter"
@@ -47,12 +50,12 @@
         android:layout_width="70dp"
         android:layout_height="50dp"
         android:background="@drawable/profile_quick_button"
-        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
+        app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.978"
-        app:layout_constraintStart_toStartOf="@+id/tbrHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
+        app:layout_constraintHorizontal_bias="0.953"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tbrHeader"
+        app:layout_constraintVertical_bias="0.036" />
 
     <TextView
         android:id="@+id/txtPgTitle"
@@ -62,12 +65,12 @@
         android:textColor="@color/white"
         android:textSize="35dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintEnd_toEndOf="@+id/tbrHeader"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.036" />
 
     <ImageButton
         android:id="@+id/btnHome"
@@ -115,23 +118,23 @@
         android:id="@+id/btnAdd"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="12dp"
         android:background="@drawable/add_icon"
-        app:layout_constraintBottom_toTopOf="@+id/tbrFooter"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvCategoryList"
-        android:layout_width="405dp"
-        android:layout_height="461dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        android:layout_width="403dp"
+        android:layout_height="451dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.426"
         tools:listitem="@layout/activity_item_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
