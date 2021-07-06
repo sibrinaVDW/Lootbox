@@ -53,7 +53,7 @@ class CollectionsView : AppCompatActivity() {
                 val document: DocumentSnapshot? = task.getResult()
                 if (document != null) {
                     numCategories = document.getLong("numCats")!!.toInt()
-                    if(numCategories > 0){
+                    if(numCategories != 0){
                         getFromDB()
                     }
                 } else {
@@ -132,6 +132,7 @@ class CollectionsView : AppCompatActivity() {
     }
 
     private fun getFromDB(){
+        Toast.makeText(this@CollectionsView, "in ", Toast.LENGTH_LONG).show()
         var catsFound : List<String> = emptyList()
         val db = FirebaseFirestore.getInstance()
 
@@ -144,25 +145,19 @@ class CollectionsView : AppCompatActivity() {
                     catsFound = document.get("existing") as List<String>
                     var i : Int = 0
                     do {
-                        Toast.makeText(this@CollectionsView, "i is " + i.toString() + " numCat is " + numCategories.toString(), Toast.LENGTH_LONG).show()
                         val docRef = db.collection(data).document("categories").collection(catsFound.get(i)).document("info")
                         docRef.get().addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                                 val document: DocumentSnapshot? = task.getResult()
                                 if (document != null) {
-                                    Toast.makeText(this@CollectionsView, "yes", Toast.LENGTH_LONG).show()
                                     val title = document.getString("tilte") as String
-                                    Toast.makeText(this@CollectionsView, title, Toast.LENGTH_LONG).show()
                                     var desc = document.getString("desc")as String
-                                    Toast.makeText(this@CollectionsView, desc, Toast.LENGTH_LONG).show()
                                     var image = document.getLong("image")!!.toInt()
-                                    Toast.makeText(this@CollectionsView, image.toString(), Toast.LENGTH_LONG).show()
                                     var goal = document.getString("goal")as String
-                                    Toast.makeText(this@CollectionsView, goal, Toast.LENGTH_LONG).show()
 
                                     titlesList.add(title)
                                     descList.add(desc)
-                                    imagesList.add(R.drawable.launcher_icon)
+                                    imagesList.add(image)
                                     goalList.add(goal)
                                     var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
                                     recView.layoutManager = LinearLayoutManager(this)
@@ -181,46 +176,8 @@ class CollectionsView : AppCompatActivity() {
 
                             }
                         }
-                    }while(i != numCategories -1)
-
-                   /* for (i in 0..numCategories-1) {
-                        val docRef = db.collection(data).document("categories").collection(catsFound.get(i)).document("info")
-                        docRef.get().addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val document: DocumentSnapshot? = task.getResult()
-                                if (document != null) {
-                                    Toast.makeText(this@CollectionsView, "yes", Toast.LENGTH_LONG).show()
-                                    val title = document.getString("tilte") as String
-                                    Toast.makeText(this@CollectionsView, title, Toast.LENGTH_LONG).show()
-                                    var desc = document.getString("desc")as String
-                                    Toast.makeText(this@CollectionsView, desc, Toast.LENGTH_LONG).show()
-                                    var image = document.getLong("image")!!.toInt()
-                                    Toast.makeText(this@CollectionsView, image.toString(), Toast.LENGTH_LONG).show()
-                                    var goal = document.getString("goal")as String
-                                    Toast.makeText(this@CollectionsView, goal, Toast.LENGTH_LONG).show()
-
-                                    titlesList.add(title)
-                                    descList.add(desc)
-                                    imagesList.add(R.drawable.launcher_icon)
-                                    goalList.add(goal)
-                                    var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
-                                    recView.layoutManager = LinearLayoutManager(this)
-                                    recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
-
-                                    catL.add(title)
-                                }
-                                else
-                                {
-                                    Log.d("LOGGER", "No such document")
-                                }
-                            }
-                            else
-                            {
-                                Log.d("LOGGER", "get failed with ", task.exception)
-
-                            }
-                        }
-                    }*/
+                        i++
+                    }while(i < numCategories)
                 }
                 else
                 {
@@ -262,6 +219,13 @@ class CollectionsView : AppCompatActivity() {
 
         val docRef = db.collection(data).document("categories")
         docRef.update("existing", catL)
+
+        val newItm = hashMapOf(
+            "numItems" to 0,
+            "existing" to ""
+        )
+        db.collection(data)
+            .document("categories").collection(title).document("items").set(newItm)
     }
 
 
