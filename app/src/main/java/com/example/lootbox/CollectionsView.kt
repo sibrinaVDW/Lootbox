@@ -185,7 +185,7 @@ class CollectionsView : AppCompatActivity() {
                                     val title = document.getString("tilte") as String
                                     var desc = document.getString("desc")as String
 
-                                    var image = document.getString("image") as String
+                                    var image = document.getString("image") as String //0Jadeeee
                                     var goal = document.getString("goal")as String
 
                                     val ref = storageRef.child(image)
@@ -204,7 +204,7 @@ class CollectionsView : AppCompatActivity() {
 
                                     titlesList.add(title)
                                     descList.add(desc)
-                                    imagesList.add(image)
+                                    //imagesList.add(image)
 
                                     goalList.add(goal)
                                     var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
