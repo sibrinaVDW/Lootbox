@@ -59,7 +59,7 @@ class ItemListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_item_list)
         val intent = intent
         data = intent.getStringExtra("user").toString()
-        goalAmount = intent.getIntExtra("Goal",0)
+        //goalAmount = intent.getIntExtra("Goal",0)
         categoryPass = intent.getStringExtra("Category")
 
 
@@ -73,6 +73,7 @@ class ItemListActivity : AppCompatActivity() {
         progText!!.visibility = View.GONE
 
         donutOpen = false;
+        val dbIns = FirebaseFirestore.getInstance()
 
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
@@ -103,10 +104,9 @@ class ItemListActivity : AppCompatActivity() {
                 "status" to "Complete",
             )
             db.collection(data)
-                .document("goals").collection(goalTitle).add(user)
+                .document("goals").collection(goalTitle).document("goalInfo").set(user)
         }
 
-        val dbIns = FirebaseFirestore.getInstance()
         val docRef: DocumentReference = dbIns.collection(data).document("categories").collection(categoryPass!!).document("items")
         docRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {

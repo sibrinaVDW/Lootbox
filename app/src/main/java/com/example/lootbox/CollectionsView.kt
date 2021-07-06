@@ -40,6 +40,7 @@ class CollectionsView : AppCompatActivity() {
     private var data = " "
     var catSize: Int = 0
     var numCategories : Int = 0
+    var numImgs : Int = 0
     var storageRef: StorageReference = FirebaseStorage.getInstance().getReference()
     var fileName : String? = ""
 
@@ -190,16 +191,17 @@ class CollectionsView : AppCompatActivity() {
                                     var image = document.getString("image") as String
                                     var goal = document.getString("goal")as String
 
-                                    val ref = storageRef.child("images/" + image)
-                                    ref.downloadUrl.addOnCompleteListener { task ->
+                                    val storageImgRef : StorageReference = storageRef.child("images/"+image)
+                                    imagesList.add(storageImgRef.downloadUrl.result!!)
+
+                                    /*ref.downloadUrl.addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             var downloadUri = task.result!!
                                             imagesList.add(downloadUri)
                                         } else {
-                                            // Handle failures
-                                            // ...
+                                            Toast.makeText(this@CollectionsView, "nope ", Toast.LENGTH_LONG).show()
                                         }
-                                    }
+                                    }*/
 
                                 //    var image = document.getLong("image")!!.toInt()
                                 //    var goal = document.getString("goal")as String

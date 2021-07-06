@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import java.lang.Integer.parseInt
 
 
@@ -101,7 +102,8 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemTitle.text = title[position]
         holder.itemDesc.text = details[position]
-        holder.itemThumbnail.setImageURI(images[position])
+        Picasso.get().load(images[position]).into(holder.itemThumbnail)
+        //holder.itemThumbnail.setImageURI(images[position])
         holder.itemGoalDisp.text = goals[position]
     }
 

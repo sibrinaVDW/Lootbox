@@ -97,7 +97,7 @@ class NewUserAccount : AppCompatActivity() {
 
                     val catView = hashMapOf(
                         "existing" to "",
-                        "numCats" to 0
+                        "numCats" to 0,
                     )
                     db.collection((user!!.uid)).document("categories").set(catView)
 
