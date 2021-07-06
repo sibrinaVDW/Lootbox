@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="420dp"
+        android:layout_height="320dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/page_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="575dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/popup_header"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCatCreateTitle4"
+        android:layout_width="295dp"
+        android:layout_height="54dp"
+        android:text="Add new Goal"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:id="@+id/lblAddNewGoalMessage"
+        android:layout_width="169dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="36dp"
+        android:text="Set number of items needed in this category:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView15"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+    <EditText
+        android:id="@+id/edtNewGoal"
+        android:layout_width="92dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="92dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toEndOf="@+id/lblAddNewGoalMessage"
+        app:layout_constraintTop_toBottomOf="@+id/txtCatCreateTitle4" />
+
+    <ImageButton
+        android:id="@+id/btnNewGoalCreate"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/create_button"
+        android:tint="#393939"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblAddNewGoalMessage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
