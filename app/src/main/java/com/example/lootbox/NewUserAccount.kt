@@ -31,7 +31,7 @@ class NewUserAccount : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance();
         val db = FirebaseFirestore.getInstance()
-        data = intent.getStringExtra("user").toString()
+       // data = intent.getStringExtra("user").toString()
 
 
 
@@ -69,8 +69,6 @@ class NewUserAccount : AppCompatActivity() {
 
         createAcc.setOnClickListener {
             createAccount(email.text.toString(), password.text.toString()) //name.text.toString()
-            val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
-            startActivity(intent)
         }
     }
 
@@ -93,7 +91,17 @@ class NewUserAccount : AppCompatActivity() {
                         "UID" to user?.uid
                     )
                     db.collection((user?.uid)as String)
+
                         .document("details").set(userS)
+                    val catView = hashMapOf(
+                        "existing" to "",
+                        "numCats" to 0
+                    )
+                    db.collection((user!!.uid)).document("categories").set(catView)
+
+                    val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
+                    intent.putExtra("user", user?.uid.toString())
+                    startActivity(intent)
                    //updateUI(user)
                 } else {
 
