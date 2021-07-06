@@ -1,5 +1,6 @@
 package com.example.lootbox
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ class ItemsRecyclerAdapter(
     private var gameTitles: List<String>,
     private var gameDescriptions: List<String>,
     private var gameImages: List<Int>,
-    private var gameDates : List<String>
+    private var gameDates : List<String>, private var catPass : String,private var dbData : String
 ) :
     RecyclerView.Adapter<ItemsRecyclerAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,15 +23,16 @@ class ItemsRecyclerAdapter(
         val itemPicture: ImageView = itemView.findViewById(R.id.imgThumbnail)
         val itemDate : TextView = itemView.findViewById(R.id.txtDate)
 
-        //this is where I am
         init {
             itemView.setOnClickListener { v: View ->
                 val position: Int = adapterPosition
-                Toast.makeText(
-                    itemView.context,
-                    "You clicked on item # ${position + 1}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                //open clicked item activity
+                val intent = Intent(v?.context,ClickedItemActivity::class.java).apply{}
+                intent.putExtra("Item", itemTitle.text)
+                intent.putExtra("Category", catPass)
+                intent.putExtra("user", dbData)
+                v?.context.startActivity(intent)
+                Toast.makeText(itemView.context, "You clicked on item # ${position + 1}", Toast.LENGTH_SHORT).show()
             }
         }
 
