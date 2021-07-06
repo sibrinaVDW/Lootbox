@@ -1,28 +1,22 @@
 package com.example.lootbox
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.alpha
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.ByteArrayOutputStream
-import java.io.FileInputStream
-import java.io.IOException
-import kotlin.math.absoluteValue
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 private const val REQUEST_CODE = 42
@@ -33,20 +27,61 @@ class CollectionsView : AppCompatActivity() {
     private var goalList = mutableListOf<String>()
 
     var viewImage: ImageView? = null
+    var catL = arrayListOf<String>()
 
     private val pickImage = 100
     private var imageUri: Uri? = null
+    private var data = " "
+    var catSize: Int = 0
+    var numCategories : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collections_view)
 
+        val intent: Intent = intent
+        data = intent.getStringExtra("user").toString()
+
         var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
         recView.layoutManager = LinearLayoutManager(this)
-        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
+        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
 
-        addToList("Playstation","All my Playstation bois",R.drawable.launcher_icon,"Goal: 10")
-        addToList("Xbox","All my Xbox bois",R.drawable.launcher_icon, "Goal: 5")
+        val db = FirebaseFirestore.getInstance()
+        val docRef: DocumentReference = db.collection(data).document("categories")
+        docRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document: DocumentSnapshot? = task.getResult()
+                if (document != null) {
+                    numCategories = document.getLong("numCats")!!.toInt()
+                    if(numCategories > 0){
+                        getFromDB()
+                    }
+                } else {
+                    Log.d("LOGGER", "No such document")
+                }
+            } else {
+                Log.d("LOGGER", "get failed with ", task.exception)
+            }
+        }
+
+
+
+        var btnSettings : ImageButton = findViewById(R.id.btnSettings)
+        btnSettings.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@CollectionsView,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@CollectionsView,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
 
         var showPopUp : ImageButton = findViewById<ImageButton>(R.id.btnAdd)
 
@@ -70,9 +105,10 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-                        addToList(catName,catDesc,R.drawable.launcher_icon,"Goal: 0")
+                        catSize = Integer.parseInt(diagView.findViewById<EditText>(R.id.edtCatSize).text.toString())
+                        addToList(catName,catDesc,R.drawable.launcher_icon,"0")
                         recView.layoutManager = LinearLayoutManager(this@CollectionsView)
-                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList)
+                        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
                         alertDiag.dismiss()
                     }
                 })
@@ -95,11 +131,137 @@ class CollectionsView : AppCompatActivity() {
         }
     }
 
+    private fun getFromDB(){
+        var catsFound : List<String> = emptyList()
+        val db = FirebaseFirestore.getInstance()
+
+        val docRef = db.collection(data).document("categories")
+        docRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document: DocumentSnapshot? = task.getResult()
+                if (document != null) {
+                    numCategories = document.getLong("numCats")!!.toInt()
+                    catsFound = document.get("existing") as List<String>
+                    var i : Int = 0
+                    do {
+                        Toast.makeText(this@CollectionsView, "i is " + i.toString() + " numCat is " + numCategories.toString(), Toast.LENGTH_LONG).show()
+                        val docRef = db.collection(data).document("categories").collection(catsFound.get(i)).document("info")
+                        docRef.get().addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document: DocumentSnapshot? = task.getResult()
+                                if (document != null) {
+                                    Toast.makeText(this@CollectionsView, "yes", Toast.LENGTH_LONG).show()
+                                    val title = document.getString("tilte") as String
+                                    Toast.makeText(this@CollectionsView, title, Toast.LENGTH_LONG).show()
+                                    var desc = document.getString("desc")as String
+                                    Toast.makeText(this@CollectionsView, desc, Toast.LENGTH_LONG).show()
+                                    var image = document.getLong("image")!!.toInt()
+                                    Toast.makeText(this@CollectionsView, image.toString(), Toast.LENGTH_LONG).show()
+                                    var goal = document.getString("goal")as String
+                                    Toast.makeText(this@CollectionsView, goal, Toast.LENGTH_LONG).show()
+
+                                    titlesList.add(title)
+                                    descList.add(desc)
+                                    imagesList.add(R.drawable.launcher_icon)
+                                    goalList.add(goal)
+                                    var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
+                                    recView.layoutManager = LinearLayoutManager(this)
+                                    recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
+
+                                    catL.add(title)
+                                }
+                                else
+                                {
+                                    Log.d("LOGGER", "No such document")
+                                }
+                            }
+                            else
+                            {
+                                Log.d("LOGGER", "get failed with ", task.exception)
+
+                            }
+                        }
+                    }while(i != numCategories -1)
+
+                   /* for (i in 0..numCategories-1) {
+                        val docRef = db.collection(data).document("categories").collection(catsFound.get(i)).document("info")
+                        docRef.get().addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val document: DocumentSnapshot? = task.getResult()
+                                if (document != null) {
+                                    Toast.makeText(this@CollectionsView, "yes", Toast.LENGTH_LONG).show()
+                                    val title = document.getString("tilte") as String
+                                    Toast.makeText(this@CollectionsView, title, Toast.LENGTH_LONG).show()
+                                    var desc = document.getString("desc")as String
+                                    Toast.makeText(this@CollectionsView, desc, Toast.LENGTH_LONG).show()
+                                    var image = document.getLong("image")!!.toInt()
+                                    Toast.makeText(this@CollectionsView, image.toString(), Toast.LENGTH_LONG).show()
+                                    var goal = document.getString("goal")as String
+                                    Toast.makeText(this@CollectionsView, goal, Toast.LENGTH_LONG).show()
+
+                                    titlesList.add(title)
+                                    descList.add(desc)
+                                    imagesList.add(R.drawable.launcher_icon)
+                                    goalList.add(goal)
+                                    var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
+                                    recView.layoutManager = LinearLayoutManager(this)
+                                    recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
+
+                                    catL.add(title)
+                                }
+                                else
+                                {
+                                    Log.d("LOGGER", "No such document")
+                                }
+                            }
+                            else
+                            {
+                                Log.d("LOGGER", "get failed with ", task.exception)
+
+                            }
+                        }
+                    }*/
+                }
+                else
+                {
+                    Log.d("LOGGER", "No such document")
+                }
+            }
+            else
+            {
+                Log.d("LOGGER", "get failed with ", task.exception)
+            }
+        }
+    }
+
     private fun addToList(title: String, desc: String , image: Int, goal : String){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
         goalList.add(goal)
+        numCategories++
+
+        val db = FirebaseFirestore.getInstance()
+        val user = hashMapOf(
+            "tilte" to title,
+            "desc" to desc,
+            "image" to image,
+            "goal" to goal,
+            "size" to catSize
+        )
+        db.collection(data)
+            .document("categories").collection(title).document("info").set(user)
+
+        val newCat = hashMapOf(
+            "numCats" to numCategories,
+        )
+        db.collection(data)
+            .document("categories").set(newCat)
+
+        catL.add(title)
+
+        val docRef = db.collection(data).document("categories")
+        docRef.update("existing", catL)
     }
 
 

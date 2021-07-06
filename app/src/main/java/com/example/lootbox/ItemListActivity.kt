@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,25 +29,46 @@ class ItemListActivity : AppCompatActivity() {
 
     var viewImage :  ImageButton? = null
     var numItems : Int = 0
+    var itemsGathered : Int = 0
     private var goalAmount :Int = 0
     private var categoryPass : String? = ""
+    private var catSize :Int = 1000
+    private var donutOpen : Boolean = false;
     var cal = Calendar.getInstance()
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
 
 
+    var donutPanel : ImageView? = null
+    var donutBack : ProgressBar? = null
+    var donutProg : ProgressBar? = null
+    var progText : TextView? = null
+
+    private var data = " "
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
-        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
-        addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
 
-
-
+        /*for (i in 1..50) {
+            addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+            addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+        }*/
 
         val intent = intent
+        data = intent.getStringExtra("user").toString()
         goalAmount = intent.getIntExtra("Goal",0)
         categoryPass = intent.getStringExtra("Category")
+        addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+
+
+        donutPanel = findViewById(R.id.imgDonutBack)
+        donutBack  = findViewById(R.id.background_donut)
+        donutProg  = findViewById(R.id.donut_progressbar)
+        progText  = findViewById(R.id.txtCatSize)
+
+        donutOpen = true;
 
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
@@ -66,29 +88,57 @@ class ItemListActivity : AppCompatActivity() {
             .setDuration(2000)
             .start()
 
-        //new goal stuff
-        val btnNewGoal : ImageButton = findViewById(R.id.btnNewGoalCreate)
-        var edtNewGoal :TextView = findViewById<TextView>(R.id.edtNewGoal)
+        if(itemsGathered == goalAmount)
+        {
+            //goal achieved, add to DB, do popup, do prompt 4 new goal
+                var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
+            val db = FirebaseFirestore.getInstance()
+            val user = hashMapOf(
+                "tilte" to goalTitle,
+                "category" to categoryPass,
+                "status" to "Complete",
+            )
+            db.collection(data)
+                .document("goals").collection(goalTitle).add(user)
+        }
 
+        var btnSettings : ImageButton = findViewById(R.id.btnSettings)
+        btnSettings.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
 
-        btnNewGoal.setOnClickListener(object : View.OnClickListener{
-            override fun onClick(v:View) {
-                val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
-                    .inflate(R.layout.next_goal_popup, null)
-                val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(newGoalPopUp)
-                    .setTitle("Add New Goal")
-                val alertDialog = alertBuilder.show()
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
 
-
-                //restart goal
-                numItems = 0
-              //  var newGoalAmount :Int = edtNewGoal.text
-                var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
-                newGoalIndic.text = "You have $numItems out of $goalAmount items collected"
-
-
-            }})
-
+        val btnDonut : ImageButton = findViewById(R.id.btnDonut)
+        btnDonut.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v:View){
+                if(donutOpen == false){
+                    DisplayChart()
+                    donutPanel!!.visibility = View.VISIBLE
+                    donutProg!!.visibility = View.VISIBLE
+                    donutBack!!.visibility = View.VISIBLE
+                    progText!!.visibility = View.VISIBLE
+                    donutOpen = true
+                }
+                else{
+                    donutPanel!!.visibility = View.GONE
+                    donutBack!!.visibility = View.GONE
+                    donutProg!!.visibility = View.GONE
+                    progText!!.visibility = View.GONE
+                    donutOpen = false;
+                }
+            }
+        })
 
         val btnAdd : ImageButton = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
@@ -141,7 +191,8 @@ class ItemListActivity : AppCompatActivity() {
                         rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
                         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList)
                         numItems = rcvItemList?.adapter!!.itemCount
-                        goalIndic.text = "You have $numItems out of $goalAmount items collected"
+                        itemsGathered++
+                        goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
                         alertDialog.dismiss()
                     }
                 })
@@ -157,11 +208,21 @@ class ItemListActivity : AppCompatActivity() {
         })
     }
 
-    public fun addToList(title: String, description: String, image:Int, date:String){
+    fun addToList(title: String, description: String, image:Int, date:String){
         titlesList.add(title)
         descriptionList.add(description)
         imageList.add(image)
         dateList.add(date)
+
+        val db = FirebaseFirestore.getInstance()
+        val user = hashMapOf(
+            "tilte" to title,
+            "description" to description,
+            "image" to image,
+            "date" to date,
+            )
+        db.collection(data)
+            .document("categories").collection(categoryPass!!).document("items").collection(title).document("itemInfo").set(user)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -172,6 +233,22 @@ class ItemListActivity : AppCompatActivity() {
             super.onActivityResult(requestCode, requestCode, data)
         }
     }
+
+    fun DisplayChart() {
+        // Update the text in a center of the chart:
+        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize)
+
+        // Calculate the slice size and update the pie chart:
+        val d = numItems.toDouble() / catSize.toDouble()
+        //d = 99.toDouble()/catSize
+        val progress = (d * 100).toInt()
+        Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
+        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d).toString() + "% collected.")
+        donutBack!!.max = catSize
+        donutBack!!.progress = catSize
+        donutProg!!.progress = progress
+    }
+
 
 }
 
