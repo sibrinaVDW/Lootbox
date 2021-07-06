@@ -9,7 +9,8 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+//import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
@@ -83,6 +84,8 @@ class NewUserAccount : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = mAuth!!.currentUser
+                 //   val uid = FirebaseAuth.getInstance().uid ?: ""
+                 //   val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
                     val db = FirebaseFirestore.getInstance()
                     val userS = hashMapOf(
@@ -93,6 +96,7 @@ class NewUserAccount : AppCompatActivity() {
                         .document("details").set(userS)
                    //updateUI(user)
                 } else {
+
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
