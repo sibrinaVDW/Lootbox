@@ -18,6 +18,8 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         var email : String? = ""
+        var date : String? = ""
+        var name : String? = ""
 
         val intent: Intent = intent
         data = intent.getStringExtra("user").toString()
@@ -32,6 +34,17 @@ class Profile : AppCompatActivity() {
                     val emailDisp : TextView = findViewById(R.id.txtProfileEmail)
                     emailDisp.text = email
                     Toast.makeText(this@Profile, email, Toast.LENGTH_LONG).show()
+
+                    date = document.getString("date")
+                    val dateDisp : TextView = findViewById(R.id.txtProfileBirthdate)
+                    dateDisp.text = date
+                    Toast.makeText(this@Profile, date, Toast.LENGTH_LONG).show()
+
+                    name = document.getString("name")
+                    val usernameDisp : TextView = findViewById(R.id.txtProfileName)
+                    usernameDisp.text = name
+                    Toast.makeText(this@Profile, name, Toast.LENGTH_LONG).show()
+
                 } else {
                     Log.d("LOGGER", "No such document")
                 }
