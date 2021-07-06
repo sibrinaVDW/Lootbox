@@ -117,18 +117,19 @@ class CollectionsView : AppCompatActivity() {
 
                         fileName = numCategories.toString() + catName
                         uploadImg(fileName!!,imageUri!!)
-                        var downloadUri : Uri = imageUri!!
+                       // var downloadUri : Uri = imageUri!!
                         val ref = storageRef.child(fileName!!)
                         ref.downloadUrl.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                downloadUri = task.result!!
+                             var  downloadUri = task.result!!
+                                addToList(catName,catDesc,downloadUri,"0")
                             } else {
                                 // Handle failures
                                 // ...
                             }
                         }
 
-                        addToList(catName,catDesc,downloadUri,"0")
+
                         recView.layoutManager = LinearLayoutManager(this@CollectionsView)
                         recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
                         alertDiag.dismiss()
@@ -153,7 +154,8 @@ class CollectionsView : AppCompatActivity() {
     }
 
     fun uploadImg(name: String, contentUri:Uri){
-        var image : StorageReference  = storageRef.child("images/" + name)
+
+        var image : StorageReference  = storageRef.child(name)
         var uploadTask = image.putFile(contentUri)
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
@@ -188,7 +190,7 @@ class CollectionsView : AppCompatActivity() {
                                     var image = document.getString("image") as String
                                     var goal = document.getString("goal")as String
 
-                                    val ref = storageRef.child(image)
+                                    val ref = storageRef.child("images/" + image)
                                     ref.downloadUrl.addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             var downloadUri = task.result!!
@@ -200,11 +202,11 @@ class CollectionsView : AppCompatActivity() {
                                     }
 
                                 //    var image = document.getLong("image")!!.toInt()
-                                //   var goal = document.getString("goal")as String
+                                //    var goal = document.getString("goal")as String
 
                                     titlesList.add(title)
                                     descList.add(desc)
-                                    imagesList.add(image)
+                                 //   imagesList.add(image)
 
                                     goalList.add(goal)
                                     var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
@@ -238,6 +240,7 @@ class CollectionsView : AppCompatActivity() {
             }
         }
     }
+
 
     private fun addToList(title: String, desc: String , image: Uri, goal : String){
         titlesList.add(title)

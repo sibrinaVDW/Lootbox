@@ -93,7 +93,6 @@ class NewUserAccount : AppCompatActivity() {
                         "name" to name,
                     )
                     db.collection((user?.uid)as String)
-
                         .document("details").set(userS)
 
                     val catView = hashMapOf(
