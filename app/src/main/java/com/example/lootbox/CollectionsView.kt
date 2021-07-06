@@ -184,6 +184,7 @@ class CollectionsView : AppCompatActivity() {
                                 if (document != null) {
                                     val title = document.getString("tilte") as String
                                     var desc = document.getString("desc")as String
+
                                     var image = document.getString("image") as String
                                     var goal = document.getString("goal")as String
 
@@ -198,8 +199,12 @@ class CollectionsView : AppCompatActivity() {
                                         }
                                     }
 
+                                //    var image = document.getLong("image")!!.toInt()
+                                //   var goal = document.getString("goal")as String
+
                                     titlesList.add(title)
                                     descList.add(desc)
+                                    imagesList.add(image)
 
                                     goalList.add(goal)
                                     var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
