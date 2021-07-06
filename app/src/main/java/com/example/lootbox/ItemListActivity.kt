@@ -66,6 +66,30 @@ class ItemListActivity : AppCompatActivity() {
             .setDuration(2000)
             .start()
 
+        //new goal stuff
+        val btnNewGoal : ImageButton = findViewById(R.id.btnNewGoalCreate)
+        var edtNewGoal :TextView = findViewById<TextView>(R.id.edtNewGoal)
+
+
+        btnNewGoal.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v:View) {
+                val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
+                    .inflate(R.layout.next_goal_popup, null)
+                val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(newGoalPopUp)
+                    .setTitle("Add New Goal")
+                val alertDialog = alertBuilder.show()
+
+
+                //restart goal
+                numItems = 0
+              //  var newGoalAmount :Int = edtNewGoal.text
+                var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
+                newGoalIndic.text = "You have $numItems out of $goalAmount items collected"
+
+
+            }})
+
+
         val btnAdd : ImageButton = findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v:View){
