@@ -8,35 +8,19 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="427dp"
-        android:layout_height="890dp"
+        android:layout_width="616dp"
+        android:layout_height="976dp"
         android:background="@drawable/page_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/txtPgTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Don't have an account?"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
-
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="177dp"
-        android:layout_height="56dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:background="@drawable/signin_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="106dp"
-        android:layout_height="41dp"
+        android:layout_width="200dp"
+        android:layout_height="75dp"
         android:background="@drawable/signin_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,10 +40,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.432" />
 
+    <TextView
+        android:id="@+id/txtPgTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account?"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.89" />
+
     <EditText
         android:id="@+id/password"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
+        android:layout_width="350dp"
+        android:layout_height="90dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="textPassword"
@@ -68,14 +67,15 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67" />
+        app:layout_constraintVertical_bias="0.665" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
+        android:layout_width="350dp"
+        android:layout_height="90dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -84,14 +84,15 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.577" />
+        app:layout_constraintVertical_bias="0.56" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
-        android:layout_width="318dp"
-        android:layout_height="132dp"
+        android:layout_width="603dp"
+        android:layout_height="255dp"
         android:background="@drawable/signin_header"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -104,28 +105,30 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
         android:background="@android:color/transparent"
         android:text="Sign Up"
+        android:textSize="20sp"
         android:textColor="@drawable/button_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.813"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
+        app:layout_constraintVertical_bias="0.91" />
 
     <ImageButton
         android:id="@+id/btnSignIn"
-        android:layout_width="250dp"
-        android:layout_height="47dp"
+        android:layout_width="470dp"
+        android:layout_height="90dp"
         android:background="@drawable/signin_button"
         android:tint="#002E2E2E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.765" />
+        app:layout_constraintVertical_bias="0.769" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

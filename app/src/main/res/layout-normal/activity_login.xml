@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="176dp"
-        android:layout_height="59dp"
+        android:layout_width="225dp"
+        android:layout_height="75dp"
         android:background="@drawable/signin_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,8 +30,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="117dp"
-        android:layout_height="47dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:background="@drawable/signin_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,19 +46,19 @@
         android:layout_height="wrap_content"
         android:text="Don't have an account?"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintHorizontal_bias="0.331"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.878" />
+        app:layout_constraintVertical_bias="0.883" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="215dp"
-        android:layout_height="47dp"
+        android:layout_width="275dp"
+        android:layout_height="60dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="textPassword"
@@ -73,8 +73,8 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="215dp"
-        android:layout_height="47dp"
+        android:layout_width="275dp"
+        android:layout_height="60dp"
         android:background="@drawable/signin_text_box"
         android:ems="10"
         android:inputType="textEmailAddress"
@@ -89,8 +89,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader"
-        android:layout_width="320dp"
-        android:layout_height="153dp"
+        android:layout_width="411dp"
+        android:layout_height="197dp"
         android:background="@drawable/signin_header"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -110,15 +110,15 @@
         android:textColor="@drawable/button_text_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.855"
+        app:layout_constraintHorizontal_bias="0.839"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.897" />
 
     <ImageButton
         android:id="@+id/btnSignIn"
-        android:layout_width="273dp"
-        android:layout_height="55dp"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
         android:background="@drawable/signin_button"
         android:tint="#002E2E2E"
         app:layout_constraintBottom_toBottomOf="parent"
