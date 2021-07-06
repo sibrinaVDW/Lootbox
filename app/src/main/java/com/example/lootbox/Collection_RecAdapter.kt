@@ -1,6 +1,7 @@
 package com.example.lootbox
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.view.MenuItem
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.Integer.parseInt
 
 
-public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Int>, private var goals : List<String>, private var dbData : String) :
+public class Collection_RecAdapter(private var title: List<String>, private var details: List<String>, private var images:List<Uri>, private var goals : List<String>, private var dbData : String) :
 RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, PopupMenu.OnMenuItemClickListener {
@@ -100,7 +101,7 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.itemTitle.text = title[position]
         holder.itemDesc.text = details[position]
-        holder.itemThumbnail.setImageResource(images[position])
+        holder.itemThumbnail.setImageURI(images[position])
         holder.itemGoalDisp.text = goals[position]
     }
 
