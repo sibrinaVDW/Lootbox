@@ -13,33 +13,33 @@
         android:background="@drawable/page_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnAccountCreate"
-        android:layout_width="232dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="300dp"
+        android:layout_height="75dp"
         android:background="@drawable/create_button"
         android:tint="#393939"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtDOB" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tbrHeader2"
-        android:layout_width="411dp"
-        android:layout_height="197dp"
+        android:layout_width="429dp"
+        android:layout_height="198dp"
         android:background="@drawable/signin_header"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -48,120 +48,134 @@
         android:id="@+id/imgNewAcc"
         android:layout_width="333dp"
         android:layout_height="47dp"
-        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tbrHeader2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.312"
         app:srcCompat="@drawable/signup_title" />
 
     <EditText
         android:id="@+id/edtName"
         android:layout_width="276dp"
         android:layout_height="39dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="Name"
         android:inputType="textPersonName"
-        android:textColor="#000000"
+        android:text="Name"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.612" />
 
     <ImageView
         android:id="@+id/imgName"
         android:layout_width="41dp"
         android:layout_height="46dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/edtName"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edtName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.608"
         app:srcCompat="@drawable/opsc_signupperson" />
 
     <EditText
         android:id="@+id/edtEmail"
         android:layout_width="276dp"
         android:layout_height="39dp"
-        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Email"
         android:inputType="textPersonName"
-        android:textColor="#000000"
+        android:text="Email"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.679" />
 
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="276dp"
         android:layout_height="39dp"
-        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Password"
         android:inputType="textPassword"
-        android:textColor="#000000"
+        android:text="Password"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtEmail" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.745" />
 
     <EditText
         android:id="@+id/edtDOB"
         android:layout_width="276dp"
         android:layout_height="39dp"
-        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Date of Birth"
         android:inputType="text"
-        android:textColor="#000000"
+        android:text="Date of Birth"
+        android:textColor="#AAAAAA"
+        android:textStyle="italic"        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.812" />
 
     <ImageView
         android:id="@+id/imgEmail"
         android:layout_width="42dp"
         android:layout_height="45dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/edtEmail"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgName"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.676"
         app:srcCompat="@drawable/opsc_signupemail" />
 
     <ImageView
         android:id="@+id/imgDOB"
         android:layout_width="42dp"
         android:layout_height="44dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/edtDOB"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgPass"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.802"
         app:srcCompat="@drawable/opsc_signupdob" />
 
     <ImageView
         android:id="@+id/imgPass"
         android:layout_width="41dp"
         android:layout_height="42dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/edtPassword"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEmail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.738"
         app:srcCompat="@drawable/opsc_signuppass" />
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="173dp"
-        android:layout_height="135dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/camera_add_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgNewAcc"
-        app:srcCompat="@drawable/camera_icon" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
