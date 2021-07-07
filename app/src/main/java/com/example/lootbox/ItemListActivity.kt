@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.log
 
 
@@ -37,6 +38,7 @@ class ItemListActivity : AppCompatActivity() {
     var numItems : Int = 0
     var itemsGathered : Int = 0
     var dbItemCount : Int = 0
+    var dbGoalCount : Int = 0
     private var goalAmount :Int = 0
     private var categoryPass : String? = ""
     private var catSize :Int = 50
@@ -46,6 +48,7 @@ class ItemListActivity : AppCompatActivity() {
     val myFormat = "dd/MM/yyyy"
     val sdf = SimpleDateFormat(myFormat, Locale.UK)
     var itemL = arrayListOf<String>()
+    var goalL = arrayListOf<String>()
 
     var donutPanel : ImageView? = null
     var donutBack : ProgressBar? = null
@@ -61,7 +64,6 @@ class ItemListActivity : AppCompatActivity() {
 
         val intent = intent
         data = intent.getStringExtra("user").toString()
-        //goalAmount = intent.getIntExtra("Goal",-1)
         categoryPass = intent.getStringExtra("Category")
 
         donutPanel = findViewById(R.id.imgDonutBack)
@@ -88,15 +90,81 @@ class ItemListActivity : AppCompatActivity() {
         catDisp.text = categoryPass
         //progress bar
         val pb = findViewById<ProgressBar>(R.id.pb)
-
         val docRef1 = db.collection(data).document("categories").collection(categoryPass!!).document("info")
         docRef1.get().addOnCompleteListener { task ->
             if(task.isSuccessful){
                 val document : DocumentSnapshot? = task.getResult()
                 if(document != null){
                     goalAmount = document.getString("goal")!!.toInt()
+                    itemsGathered = document.getLong("itemsGathered")!!.toInt()
                     goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
                     pb.max = goalAmount
+
+                    if(itemsGathered == goalAmount)
+                    {
+                        //goal achieved, add to DB, do popup, do prompt 4 new goal
+                        val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
+                            .inflate(R.layout.next_goal_popup, null)
+                        val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(newGoalPopUp)
+                            .setTitle("Add New Goal")
+                        val alertDialog = alertBuilder.show()
+                        //adding new goal to list
+                        val btnNewGoal : ImageButton = newGoalPopUp.findViewById(R.id.btnNewGoalCreate)
+                        btnNewGoal.setOnClickListener(object : View.OnClickListener{
+                            override fun onClick(v:View) {
+
+                                var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
+                                var edtNewGoal :String =  newGoalPopUp.findViewById<TextView>(R.id.edtNewGoal).text.toString()
+                                goalAmount = (edtNewGoal).toInt()
+
+                                val db = FirebaseFirestore.getInstance()
+                                val user = hashMapOf(
+                                    "tilte" to goalTitle,
+                                    "category" to categoryPass,
+                                    "status" to "Complete",
+                                )
+                                db.collection(data)
+                                    .document("goals").collection(goalTitle).document("goalInfo").set(user)
+
+                                val docRef = db.collection(data).document("categories").collection(categoryPass!!).document("info")
+                                docRef.update("goal", goalAmount.toString())
+                                //restart goal
+                                itemsGathered = 0
+                                docRef.update("itemsGathered", itemsGathered)
+                                var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
+                                newGoalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+
+                                var goalsFound : List<String> = emptyList()
+                                val docRef2 = db.collection(data).document("goals")
+                                docRef2.get().addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val document: DocumentSnapshot? = task.getResult()
+                                        if(document != null){
+                                            dbGoalCount = document.getLong("numGoals")!!.toInt()
+                                            dbGoalCount++
+                                            //goalsFound = document.get("existing") as List<String>
+                                            goalL = document.get("existing") as ArrayList<String>
+                                            goalL.add(goalTitle)
+
+                                            //goalsFound.toMutableList().add(goalTitle)
+                                            db.collection(data).document("goals").update("numGoals",dbGoalCount)
+                                            db.collection(data).document("goals").update("existing",goalL)
+                                        }
+                                        else
+                                        {
+                                            Log.d("LOGGER", "No such document")
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Log.d("LOGGER", "get failed with ", task.exception)
+                                    }
+                                }
+                                alertDialog.dismiss()
+                            }})
+
+                    }
+
                 } else {
                     Log.d("Logger", "No such document")
                 }
@@ -109,42 +177,6 @@ class ItemListActivity : AppCompatActivity() {
         ObjectAnimator.ofInt(pb,"Progress",currentProgress)
             .setDuration(2000)
             .start()
-
-       /*if(itemsGathered == goalAmount)
-        {
-            //goal achieved, add to DB, do popup, do prompt 4 new goal
-            val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
-                .inflate(R.layout.next_goal_popup, null)
-            val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(newGoalPopUp)
-                .setTitle("Add New Goal")
-            val alertDialog = alertBuilder.show()
-            //adding new goal to list
-            val btnNewGoal : ImageButton = newGoalPopUp.findViewById(R.id.btnNewGoalCreate)
-            btnNewGoal.setOnClickListener(object : View.OnClickListener{
-                override fun onClick(v:View) {
-                    var edtNewGoal :String =  newGoalPopUp.findViewById<TextView>(R.id.edtNewGoal).text.toString()
-                    goalAmount = (edtNewGoal).toInt()
-                    var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
-            val db = FirebaseFirestore.getInstance()
-            val user = hashMapOf(
-                "tilte" to goalTitle,
-                "category" to categoryPass,
-                "status" to "Complete",
-            )
-            db.collection(data)
-                .document("goals").collection(goalTitle).document("goalInfo").set(user)
-
-                val docRef = db.collection(data).document("categories").collection(categoryPass!!).document("info")
-                docRef.update("goal", goalAmount.toString())
-                    //restart goal
-                    itemsGathered = 0
-                    var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
-                    newGoalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
-                   alertDialog.dismiss()
-
-                }})
-
-        }*/
 
         val docRef: DocumentReference = db.collection(data).document("categories").collection(categoryPass!!).document("items")
         docRef.get().addOnCompleteListener { task ->
@@ -283,12 +315,29 @@ class ItemListActivity : AppCompatActivity() {
                         rcvItemList.layoutManager = LinearLayoutManager(this@ItemListActivity)
                         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList,categoryPass!!,data)
                         numItems = rcvItemList?.adapter!!.itemCount
-                        itemsGathered++
-                        val currentProgress = itemsGathered;
-                        ObjectAnimator.ofInt(pb,"Progress",currentProgress)
-                            .setDuration(2000)
-                            .start()
-                        goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+
+                        val docRef1 = db.collection(data).document("categories").collection(categoryPass!!).document("info")
+                        docRef1.get().addOnCompleteListener { task ->
+                            if(task.isSuccessful){
+                                val document : DocumentSnapshot? = task.getResult()
+                                if(document != null){
+                                    itemsGathered = document.getLong("itemsGathered")!!.toInt()
+                                    itemsGathered++
+                                    val currentProgress = itemsGathered;
+                                    ObjectAnimator.ofInt(pb,"Progress",currentProgress)
+                                        .setDuration(2000)
+                                        .start()
+                                    goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+
+                                    val docRef = db.collection(data).document("categories").collection(categoryPass!!).document("info")
+                                    docRef.update("itemsGathered", itemsGathered)
+                                } else {
+                                    Log.d("Logger", "No such document")
+                                }
+                            } else {
+                                Log.d("Logger", "get failed with", task.exception)
+                            }
+                        }
                         alertDialog.dismiss()
                     }
                 })
@@ -302,6 +351,10 @@ class ItemListActivity : AppCompatActivity() {
 
             }
         })
+    }
+
+    private fun checkGoal(){
+
     }
 
     private fun getFromDB(){
