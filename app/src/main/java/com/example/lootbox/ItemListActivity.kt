@@ -21,7 +21,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.math.log
 
 
 private const val REQUEST_CODE = 42
@@ -210,6 +209,24 @@ class ItemListActivity : AppCompatActivity() {
         btnProfile.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
                 val intent = Intent(this@ItemListActivity,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
+        var btnGoals : ImageButton = findViewById(R.id.btnGoals)
+        btnGoals.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,Goals::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
+        var btnHome : ImageButton = findViewById(R.id.btnHome)
+        btnHome.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ItemListActivity,CollectionsView::class.java).apply{}
                 intent.putExtra("user", data)
                 startActivity(intent)
             }

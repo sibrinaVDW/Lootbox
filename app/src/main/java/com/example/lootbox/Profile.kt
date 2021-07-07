@@ -3,6 +3,8 @@ package com.example.lootbox
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +27,34 @@ class Profile : AppCompatActivity() {
 
         val intent: Intent = intent
         data = intent.getStringExtra("user").toString()
+
+
+        var btnSettings : ImageButton = findViewById(R.id.btnGoalSetting)
+        btnSettings.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Profile,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnGoals : ImageButton = findViewById(R.id.btnGoalsGoals)
+        btnGoals.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Profile,Goals::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
+        var btnHome : ImageButton = findViewById(R.id.btnHome)
+        btnHome.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Profile,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
 
         val db = FirebaseFirestore.getInstance()
         val docRef: DocumentReference = db.collection(data).document("details")

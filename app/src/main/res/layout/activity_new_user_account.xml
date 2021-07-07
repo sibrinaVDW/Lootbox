@@ -166,16 +166,4 @@
         app:layout_constraintVertical_bias="0.738"
         app:srcCompat="@drawable/opsc_signuppass" />
 
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/camera_add_icon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
