@@ -82,7 +82,7 @@ class ItemListActivity : AppCompatActivity() {
 
         donutOpen = false;
 
-        val dbItems = FirebaseFirestore.getInstance(
+        val dbItems = FirebaseFirestore.getInstance()
         val dbIns = FirebaseFirestore.getInstance()
         
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
