@@ -39,7 +39,6 @@ class CollectionsView : AppCompatActivity() {
     private val pickImage = 100
     private var imageUri: Uri? = null
     private var data = " "
-    var catSize: Int = 0
     var numCategories : Int = 0
     var currUrl = ""
     var storageRef: StorageReference = FirebaseStorage.getInstance().getReference()
@@ -114,7 +113,6 @@ class CollectionsView : AppCompatActivity() {
                     override fun onClick(v: View?) {
                         val catName = diagView.findViewById<EditText>(R.id.edtCatName).text.toString()
                         val catDesc = diagView.findViewById<EditText>(R.id.edtCatDesc).text.toString()
-                        catSize = Integer.parseInt(diagView.findViewById<EditText>(R.id.edtCatSize).text.toString())
 
                         fileName = numCategories.toString() + catName
                         uploadImg(fileName!!,imageUri!!)
@@ -164,7 +162,6 @@ class CollectionsView : AppCompatActivity() {
         }.addOnSuccessListener { taskSnapshot ->
             image.downloadUrl.addOnCompleteListener () {taskSnapshot ->
                 currUrl = taskSnapshot.result.toString()
-                println ("url =" + currUrl.toString ())
             }
         }
     }
@@ -258,7 +255,6 @@ class CollectionsView : AppCompatActivity() {
             "desc" to desc,
             "image" to image,
             "goal" to goal,
-            "size" to catSize
         )
         db.collection(data)
             .document("categories").collection(title).document("info").set(user)

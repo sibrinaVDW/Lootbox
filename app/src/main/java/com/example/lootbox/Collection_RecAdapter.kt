@@ -35,21 +35,6 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
             itemView.setOnClickListener{v:View ->
                 val pos: Int = adapterPosition
                 val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
-                val docRef1 = dbItems.collection(dbData).document("categories").collection(itemTitle.text.toString()).document("info")
-                docRef1.get().addOnCompleteListener { task ->
-                    if(task.isSuccessful){
-                        val document : DocumentSnapshot? = task.getResult()
-                        if(document != null){
-                          var  goalAmount = document.getLong("goal")!!.toInt()
-                            intent.putExtra("Goal",goalAmount)
-                        } else {
-                            Log.d("Logger", "No such document")
-                        }
-                    } else {
-                        Log.d("Logger", "get failed with", task.exception)
-                    }
-
-                }
                 intent.putExtra("Category", itemTitle.text)
                 intent.putExtra("user", dbData)
                 v?.context.startActivity(intent)
@@ -82,7 +67,9 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
                                 override fun onClick(v: View?) {
                                     val goalNum = diagView.findViewById<EditText>(R.id.edtGoalNum).text.toString()
                                     itemGoal = parseInt(goalNum)
-                                    itemGoalDisp.text = "You need to create $goalNum items for this category"
+                                    val db= FirebaseFirestore.getInstance()
+                                    val docRef = db.collection(dbData).document("categories").collection(itemTitle.text.toString()).document("info")
+                                    docRef.update("goal", itemGoal.toString())
                                     alertDiag.dismiss()
                                 }
                             })
