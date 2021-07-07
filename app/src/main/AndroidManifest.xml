@@ -11,20 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Lootbox">
-        <activity android:name=".SplashScreen"
-            android:theme="@style/SplashScreenTheme">
+
+
+        <activity android:name=".GalleryImage"></activity>
+        <activity android:name=".CollectionsView"></activity>
+        <activity android:name=".ItemListActivity"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".ClickedItemActivity"></activity>
+
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".NewUserAccount"/>
+        <activity android:name=".Login"></activity>
+        <activity android:name=".SplashScreen">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".GalleryImage" />
-        <activity android:name=".CollectionsView" />
-        <activity android:name=".ItemListActivity" />
-        <activity android:name=".Settings" />
-        <activity android:name=".NewUserAccount" />
-        <activity android:name=".Login">
         </activity>
     </application>
 
