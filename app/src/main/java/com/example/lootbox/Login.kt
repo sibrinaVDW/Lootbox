@@ -62,13 +62,10 @@ class Login : AppCompatActivity() {
             "UID" to currentUser?.uid
         )
         db.collection(currentUser!!.uid)
-            .document("details").set(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
+            .document("details").update("UID" , currentUser.uid)
+
+        db.collection(currentUser!!.uid)
+            .document("details").update("email" , currentUser.email)
     }
 
     private fun login(email: String, password: String)
