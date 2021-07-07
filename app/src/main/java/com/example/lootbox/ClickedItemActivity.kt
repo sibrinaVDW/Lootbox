@@ -1,9 +1,12 @@
 package com.example.lootbox
 
+import android.content.Intent
 import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +27,15 @@ class ClickedItemActivity : AppCompatActivity() {
         data = intent.getStringExtra("user").toString()
         itemName = intent.getStringExtra("Item")
         catFrom = intent.getStringExtra("Category")
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@ClickedItemActivity,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
 
         val db = FirebaseFirestore.getInstance()
         val docRef: DocumentReference = db.collection(data).document("categories").collection(catFrom!!)

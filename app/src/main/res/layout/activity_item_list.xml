@@ -144,10 +144,10 @@
 
     <ImageButton
         android:id="@+id/btnGoals"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="89dp"
+        android:layout_height="68dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/collections_quick_button"
+        android:background="@drawable/burgerbar_goals_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.495"
@@ -157,11 +157,11 @@
 
     <ImageButton
         android:id="@+id/btnSettings"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="84dp"
+        android:layout_height="65dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/notifications_quick_button"
+        android:background="@drawable/burgerbar_settings_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.942"
@@ -202,10 +202,10 @@
             android:layout_height="467dp"
             app:layout_constraintBottom_toBottomOf="@+id/background_donut"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.971"
+            app:layout_constraintHorizontal_bias="0.66"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/background_donut"
-            app:layout_constraintVertical_bias="0.808"
+            app:layout_constraintVertical_bias="0.826"
             app:srcCompat="@drawable/page_background" />
 
         <TextView

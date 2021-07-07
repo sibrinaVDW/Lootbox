@@ -43,18 +43,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnHamburger"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:background="@drawable/burger_quick_button"
-        app:layout_constraintBottom_toBottomOf="@+id/tbrHeader"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="@+id/tbrHeader"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <ImageButton
         android:id="@+id/btnProfile"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -96,12 +84,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnCollections"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnGoalsGoals"
+        android:layout_width="84dp"
+        android:layout_height="69dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/collections_quick_button"
+        android:background="@drawable/burgerbar_goals_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.495"
@@ -110,12 +98,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/btnNotif"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnGoalSetting"
+        android:layout_width="93dp"
+        android:layout_height="67dp"
         android:layout_marginTop="6dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/notifications_quick_button"
+        android:background="@drawable/burgerbar_settings_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tbrFooter"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.942"

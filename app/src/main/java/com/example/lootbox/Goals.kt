@@ -1,8 +1,11 @@
 package com.example.lootbox
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +32,41 @@ class Goals : AppCompatActivity() {
         rcvItemList.adapter = Goal_RecAdapter(titlesList,descriptionList,imageList,statusList)
 
         getFromDB()
+
+        var btnSettings : ImageButton = findViewById(R.id.btnGoalSetting)
+        btnSettings.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Goals,Settings::class.java).apply{}
+                startActivity(intent)
+            }
+        })
+
+        var btnGoals : ImageButton = findViewById(R.id.btnGoalsGoals)
+        btnGoals.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Goals,Goals::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
+        var btnProfile : ImageButton = findViewById(R.id.btnProfile)
+        btnProfile.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Goals,Profile::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
+        var btnHome : ImageButton = findViewById(R.id.btnHome)
+        btnHome.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@Goals,CollectionsView::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
 
     }
 

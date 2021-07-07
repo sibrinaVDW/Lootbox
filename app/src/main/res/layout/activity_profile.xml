@@ -46,18 +46,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <ImageButton
-        android:id="@+id/btnHamburger"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:background="@drawable/burger_quick_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.059"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tbrHeader"
-        app:layout_constraintVertical_bias="0.036" />
-
     <TextView
         android:id="@+id/txtPgTitle"
         android:layout_width="wrap_content"
@@ -219,22 +207,22 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnCollections"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnGoalsGoals"
+        android:layout_width="85dp"
+        android:layout_height="68dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/collections_quick_button"
+        android:background="@drawable/burgerbar_goals_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnNotif"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:id="@+id/btnGoalSetting"
+        android:layout_width="88dp"
+        android:layout_height="67dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/notifications_quick_button"
+        android:background="@drawable/burgerbar_settings_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tbrFooter"
         app:layout_constraintHorizontal_bias="0.942"
