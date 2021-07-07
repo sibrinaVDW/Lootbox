@@ -39,7 +39,7 @@ class ItemListActivity : AppCompatActivity() {
     var dbItemCount : Int = 0
     private var goalAmount :Int = 0
     private var categoryPass : String? = ""
-    private var catSize :Int = 1000
+    private var catSize :Int = 50
     private var donutOpen : Boolean = false;
     var accquiredCal = Calendar.getInstance()
     var releasedCal = Calendar.getInstance()
@@ -59,17 +59,10 @@ class ItemListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
 
-        /*for (i in 1..50) {
-            addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
-            addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
-        }*/
-
         val intent = intent
         data = intent.getStringExtra("user").toString()
-        //goalAmount = intent.getIntExtra("Goal",0)
+        //goalAmount = intent.getIntExtra("Goal",-1)
         categoryPass = intent.getStringExtra("Category")
-    //    addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
-
 
         donutPanel = findViewById(R.id.imgDonutBack)
         donutBack  = findViewById(R.id.background_donut)
@@ -82,13 +75,12 @@ class ItemListActivity : AppCompatActivity() {
 
         donutOpen = false;
 
-        val dbItems = FirebaseFirestore.getInstance()
-        val dbIns = FirebaseFirestore.getInstance()
+        val db = FirebaseFirestore.getInstance()
         
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList,categoryPass!!,data)
-        numItems = rcvItemList?.adapter!!.itemCount 
+
 
         var goalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
         goalIndic.text = "You have $numItems out of $goalAmount items collected"
@@ -96,29 +88,29 @@ class ItemListActivity : AppCompatActivity() {
         catDisp.text = categoryPass
         //progress bar
         val pb = findViewById<ProgressBar>(R.id.pb)
-//here
-     /*   val docRef1 = dbItems.collection(data).document("categories").collection(categoryPass!!).document("info")
+
+        val docRef1 = db.collection(data).document("categories").collection(categoryPass!!).document("info")
         docRef1.get().addOnCompleteListener { task ->
             if(task.isSuccessful){
                 val document : DocumentSnapshot? = task.getResult()
                 if(document != null){
-                    goalAmount = document.getLong("goal")!!.toInt()
+                    goalAmount = document.getString("goal")!!.toInt()
+                    goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+                    pb.max = goalAmount
                 } else {
                     Log.d("Logger", "No such document")
                 }
             } else {
                 Log.d("Logger", "get failed with", task.exception)
             }
+        }
 
-        }*/
-
-        pb.max = goalAmount;
         val currentProgress = itemsGathered;
         ObjectAnimator.ofInt(pb,"Progress",currentProgress)
             .setDuration(2000)
             .start()
 
-        if(itemsGathered == goalAmount)
+       /*if(itemsGathered == goalAmount)
         {
             //goal achieved, add to DB, do popup, do prompt 4 new goal
             val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
@@ -132,17 +124,7 @@ class ItemListActivity : AppCompatActivity() {
                 override fun onClick(v:View) {
                     var edtNewGoal :String =  newGoalPopUp.findViewById<TextView>(R.id.edtNewGoal).text.toString()
                     goalAmount = (edtNewGoal).toInt()
-
-                    //restart goal
-                    itemsGathered = 0
-                 //   goalAmount = intent.getIntExtra("New Goal",0)
-                    var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
-                    newGoalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
-                   alertDialog.dismiss()
-                    
-                }})
-            
-                var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
+                    var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
             val db = FirebaseFirestore.getInstance()
             val user = hashMapOf(
                 "tilte" to goalTitle,
@@ -151,9 +133,20 @@ class ItemListActivity : AppCompatActivity() {
             )
             db.collection(data)
                 .document("goals").collection(goalTitle).document("goalInfo").set(user)
-        }
 
-        val docRef: DocumentReference = dbIns.collection(data).document("categories").collection(categoryPass!!).document("items")
+                val docRef = db.collection(data).document("categories").collection(categoryPass!!).document("info")
+                docRef.update("goal", goalAmount.toString())
+                    //restart goal
+                    itemsGathered = 0
+                    var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
+                    newGoalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+                   alertDialog.dismiss()
+
+                }})
+
+        }*/
+
+        val docRef: DocumentReference = db.collection(data).document("categories").collection(categoryPass!!).document("items")
         docRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val document: DocumentSnapshot? = task.getResult()
@@ -291,6 +284,10 @@ class ItemListActivity : AppCompatActivity() {
                         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList,categoryPass!!,data)
                         numItems = rcvItemList?.adapter!!.itemCount
                         itemsGathered++
+                        val currentProgress = itemsGathered;
+                        ObjectAnimator.ofInt(pb,"Progress",currentProgress)
+                            .setDuration(2000)
+                            .start()
                         goalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
                         alertDialog.dismiss()
                     }
@@ -409,16 +406,35 @@ class ItemListActivity : AppCompatActivity() {
 
     fun DisplayChart() {
         // Update the text in a center of the chart:
-        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize)
+        val db = FirebaseFirestore.getInstance()
 
-        // Calculate the slice size and update the pie chart:
-        val d = numItems.toDouble() / catSize.toDouble()
-        val progress = (d * 100).toInt()
-        Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
-        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d*100).toString() + "% collected.")
-        donutBack!!.max = catSize
-        donutBack!!.progress = catSize
-        donutProg!!.progress = progress
+        val docRef = db.collection(data).document("categories").collection((categoryPass!!)).document("items")
+        docRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document: DocumentSnapshot? = task.getResult()
+                if(document != null){
+                    dbItemCount = document.getLong("numItems")!!.toInt()
+                    progText!!.setText(java.lang.String.valueOf(dbItemCount).toString() + " / " + catSize)
+
+                    // Calculate the slice size and update the pie chart:
+                    val d = dbItemCount.toDouble() / catSize.toDouble()
+                    val progress = (d * 100).toInt()
+                    Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
+                    progText!!.setText(java.lang.String.valueOf(dbItemCount).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(Math.round((d * 100)* 100) / 100.0).toString() + "% collected.")
+                    donutBack!!.max = catSize
+                    donutBack!!.progress = catSize
+                    donutProg!!.progress = progress
+                }
+                else
+                {
+                    Log.d("LOGGER", "No such document")
+                }
+            }
+            else
+            {
+                Log.d("LOGGER", "get failed with ", task.exception)
+            }
+        }
     }
 
 }
