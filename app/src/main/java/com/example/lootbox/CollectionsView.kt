@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,7 +30,7 @@ private const val REQUEST_CODE = 42
 class CollectionsView : AppCompatActivity() {
     private var titlesList = mutableListOf<String>()
     private var descList = mutableListOf< String>()
-    private var imagesList = mutableListOf<Uri>()
+    private var imagesList = mutableListOf<Int>()
     private var goalList = mutableListOf<String>()
 
     var viewImage: ImageView? = null
@@ -40,6 +41,7 @@ class CollectionsView : AppCompatActivity() {
     private var data = " "
     var catSize: Int = 0
     var numCategories : Int = 0
+    var currUrl = ""
     var storageRef: StorageReference = FirebaseStorage.getInstance().getReference()
     var fileName : String? = ""
 
@@ -49,10 +51,6 @@ class CollectionsView : AppCompatActivity() {
 
         val intent: Intent = intent
         data = intent.getStringExtra("user").toString()
-
-        var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
-        recView.layoutManager = LinearLayoutManager(this)
-        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
 
         val db = FirebaseFirestore.getInstance()
         val docRef: DocumentReference = db.collection(data).document("categories")
@@ -72,6 +70,9 @@ class CollectionsView : AppCompatActivity() {
             }
         }
 
+        var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
+        recView.layoutManager = LinearLayoutManager(this)
+        recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
 
 
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
@@ -118,17 +119,17 @@ class CollectionsView : AppCompatActivity() {
                         fileName = numCategories.toString() + catName
                         uploadImg(fileName!!,imageUri!!)
                        // var downloadUri : Uri = imageUri!!
-                        val ref = storageRef.child(fileName!!)
+                        addToList(catName,catDesc,R.drawable.launcher_icon,"0")
+                        /*val ref = storageRef.child(fileName!!)
                         ref.downloadUrl.addOnCompleteListener { task ->
                             if (task.isSuccessful) {
                              var  downloadUri = task.result!!
-                                addToList(catName,catDesc,downloadUri,"0")
+                                addToList(catName,catDesc,currUrl,"0")
                             } else {
                                 // Handle failures
                                 // ...
                             }
-                        }
-
+                        }*/
 
                         recView.layoutManager = LinearLayoutManager(this@CollectionsView)
                         recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
@@ -150,6 +151,7 @@ class CollectionsView : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == pickImage) {
             imageUri = data?.data
+            viewImage?.setImageURI(imageUri)
         }
     }
 
@@ -160,8 +162,10 @@ class CollectionsView : AppCompatActivity() {
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
+            image.downloadUrl.addOnCompleteListener () {taskSnapshot ->
+                currUrl = taskSnapshot.result.toString()
+                println ("url =" + currUrl.toString ())
+            }
         }
     }
 
@@ -187,28 +191,27 @@ class CollectionsView : AppCompatActivity() {
                                     val title = document.getString("tilte") as String
                                     var desc = document.getString("desc")as String
 
-                                    var image = document.getString("image") as String
+                                    //var image = document.getString("image") as String
+                                    var image = document.getLong("image")!!.toInt()
                                     var goal = document.getString("goal")as String
 
-                                    val ref = storageRef.child("images/" + image)
-                                    ref.downloadUrl.addOnCompleteListener { task ->
+                                    //val storageImgRef : StorageReference = storageRef.child("images/"+image)
+                                    //val check = storageImgRef.downloadUrl.result!!.toString()
+                                    imagesList.add(image)
+
+                                    /*ref.downloadUrl.addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             var downloadUri = task.result!!
                                             imagesList.add(downloadUri)
                                         } else {
-                                            // Handle failures
-                                            // ...
+                                            Toast.makeText(this@CollectionsView, "nope ", Toast.LENGTH_LONG).show()
                                         }
-                                    }
-
-                                //    var image = document.getLong("image")!!.toInt()
-                                //    var goal = document.getString("goal")as String
+                                    }*/
 
                                     titlesList.add(title)
                                     descList.add(desc)
-                                 //   imagesList.add(image)
-
                                     goalList.add(goal)
+
                                     var recView :RecyclerView = findViewById(R.id.rcvCategoryList)
                                     recView.layoutManager = LinearLayoutManager(this)
                                     recView.adapter = Collection_RecAdapter(titlesList,descList,imagesList,goalList, data)
@@ -242,7 +245,7 @@ class CollectionsView : AppCompatActivity() {
     }
 
 
-    private fun addToList(title: String, desc: String , image: Uri, goal : String){
+    private fun addToList(title: String, desc: String , image: Int, goal : String){
         titlesList.add(title)
         descList.add(desc)
         imagesList.add(image)
@@ -253,7 +256,7 @@ class CollectionsView : AppCompatActivity() {
         val user = hashMapOf(
             "tilte" to title,
             "desc" to desc,
-            "image" to fileName,
+            "image" to image,
             "goal" to goal,
             "size" to catSize
         )
