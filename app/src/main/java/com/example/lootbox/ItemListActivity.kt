@@ -95,16 +95,20 @@ class ItemListActivity : AppCompatActivity() {
         //progress bar
         val pb = findViewById<ProgressBar>(R.id.pb)
 //here
-        val docRef1 : DocumentReference = dbItems.collection(data).document("categories").collection(categoryPass!!).document("info")
+     /*   val docRef1 = dbItems.collection(data).document("categories").collection(categoryPass!!).document("info")
         docRef1.get().addOnCompleteListener { task ->
             if(task.isSuccessful){
                 val document : DocumentSnapshot? = task.getResult()
                 if(document != null){
                     goalAmount = document.getLong("goal")!!.toInt()
-                } else Log.d("Logger", "No such document")
-            } else Log.d("Logger","get failed with",task.exception)
+                } else {
+                    Log.d("Logger", "No such document")
+                }
+            } else {
+                Log.d("Logger", "get failed with", task.exception)
+            }
 
-        }
+        }*/
 
         pb.max = goalAmount;
         val currentProgress = itemsGathered;
