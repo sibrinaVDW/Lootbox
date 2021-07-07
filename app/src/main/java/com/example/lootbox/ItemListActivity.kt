@@ -125,6 +125,8 @@ class ItemListActivity : AppCompatActivity() {
             }
         }
 
+        numItems = rcvItemList?.adapter!!.itemCount
+
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
         btnSettings.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
@@ -365,10 +367,9 @@ class ItemListActivity : AppCompatActivity() {
 
         // Calculate the slice size and update the pie chart:
         val d = numItems.toDouble() / catSize.toDouble()
-        //d = 99.toDouble()/catSize
         val progress = (d * 100).toInt()
         Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
-        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d).toString() + "% collected.")
+        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d*100).toString() + "% collected.")
         donutBack!!.max = catSize
         donutBack!!.progress = catSize
         donutProg!!.progress = progress
