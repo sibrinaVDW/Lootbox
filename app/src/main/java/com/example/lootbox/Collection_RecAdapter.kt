@@ -1,6 +1,7 @@
 package com.example.lootbox
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -11,8 +12,10 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+
 import java.lang.Integer.parseInt
 
 
@@ -119,6 +122,8 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         holder.itemTitle.text = title[position]
         holder.itemDesc.text = details[position]
         holder.itemThumbnail.setImageResource(images[position])
+        //Picasso.get().load(images[position]).into(holder.itemThumbnail)
+        //holder.itemThumbnail.setImageURI(images[position])
         holder.itemGoalDisp.text = goals[position]
     }
 

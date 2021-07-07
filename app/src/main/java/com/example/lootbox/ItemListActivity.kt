@@ -66,7 +66,7 @@ class ItemListActivity : AppCompatActivity() {
 
         val intent = intent
         data = intent.getStringExtra("user").toString()
-        goalAmount = intent.getIntExtra("Goal",0)
+        //goalAmount = intent.getIntExtra("Goal",0)
         categoryPass = intent.getStringExtra("Category")
     //    addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
 
@@ -81,8 +81,10 @@ class ItemListActivity : AppCompatActivity() {
         progText!!.visibility = View.GONE
 
         donutOpen = false;
-        val dbItems = FirebaseFirestore.getInstance()
 
+        val dbItems = FirebaseFirestore.getInstance(
+        val dbIns = FirebaseFirestore.getInstance()
+        
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList,categoryPass!!,data)
@@ -140,8 +142,6 @@ class ItemListActivity : AppCompatActivity() {
                     
                 }})
             
-            
-
                 var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
             val db = FirebaseFirestore.getInstance()
             val user = hashMapOf(
@@ -150,10 +150,9 @@ class ItemListActivity : AppCompatActivity() {
                 "status" to "Complete",
             )
             db.collection(data)
-                .document("goals").collection(goalTitle).add(user)
+                .document("goals").collection(goalTitle).document("goalInfo").set(user)
         }
 
-        val dbIns = FirebaseFirestore.getInstance()
         val docRef: DocumentReference = dbIns.collection(data).document("categories").collection(categoryPass!!).document("items")
         docRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -171,6 +170,8 @@ class ItemListActivity : AppCompatActivity() {
                 Log.d("LOGGER", "get failed with ", task.exception)
             }
         }
+
+        numItems = rcvItemList?.adapter!!.itemCount
 
         var btnSettings : ImageButton = findViewById(R.id.btnSettings)
         btnSettings.setOnClickListener(object: View.OnClickListener{
@@ -412,15 +413,13 @@ class ItemListActivity : AppCompatActivity() {
 
         // Calculate the slice size and update the pie chart:
         val d = numItems.toDouble() / catSize.toDouble()
-        //d = 99.toDouble()/catSize
         val progress = (d * 100).toInt()
         Toast.makeText(this@ItemListActivity, d.toString() + "  "+progress.toString(), Toast.LENGTH_LONG).show()
-        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d).toString() + "% collected.")
+        progText!!.setText(java.lang.String.valueOf(numItems).toString() + " / " + catSize + "\n\t" + java.lang.String.valueOf(d*100).toString() + "% collected.")
         donutBack!!.max = catSize
         donutBack!!.progress = catSize
         donutProg!!.progress = progress
     }
-
 
 }
 

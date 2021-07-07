@@ -21,6 +21,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         mAuth = FirebaseAuth.getInstance();
         val db = FirebaseFirestore.getInstance()
+
     }
     override fun onStart() {
         super.onStart()
@@ -68,12 +69,6 @@ class Login : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
-
-        /*val catView = hashMapOf(
-            "existing" to "",
-            "numCats" to 0
-        )
-        db.collection((currentUser!!.uid)).document("categories").set(catView)*/
     }
 
     private fun login(email: String, password: String)

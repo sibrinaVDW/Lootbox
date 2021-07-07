@@ -68,14 +68,14 @@ class NewUserAccount : AppCompatActivity() {
         val name  = findViewById<EditText>(R.id.edtName)
 
         createAcc.setOnClickListener {
-            createAccount(email.text.toString(), password.text.toString()) //name.text.toString()
+            createAccount(email.text.toString(), password.text.toString(), name.text.toString()) //name.text.toString()
         }
     }
 
    //private fun updateUI(currentUser: FirebaseUser?) {
 
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String, name: String) {
         mAuth!!.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this@NewUserAccount) { task ->
                 if (task.isSuccessful) {
@@ -88,14 +88,16 @@ class NewUserAccount : AppCompatActivity() {
                     val db = FirebaseFirestore.getInstance()
                     val userS = hashMapOf(
                         "email" to user?.email,
-                        "UID" to user?.uid
+                        "UID" to user?.uid,
+                        "date" to sdf.format(cal.getTime()),
+                        "name" to name,
                     )
                     db.collection((user?.uid)as String)
-
                         .document("details").set(userS)
+
                     val catView = hashMapOf(
                         "existing" to "",
-                        "numCats" to 0
+                        "numCats" to 0,
                     )
                     db.collection((user!!.uid)).document("categories").set(catView)
 
