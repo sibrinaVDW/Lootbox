@@ -3,6 +3,7 @@ package com.example.lootbox
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.MenuItem
 import android.view.View
@@ -11,7 +12,10 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-//import com.squareup.picasso.Picasso
+
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
+
 import java.lang.Integer.parseInt
 
 
@@ -25,12 +29,27 @@ RecyclerView.Adapter<Collection_RecAdapter.ViewHolder>(){
         public val itemGoalDisp : TextView = itemView.findViewById(R.id.txtDate)
 
         var itemGoal : Int = 0
+        val dbItems = FirebaseFirestore.getInstance()
         //store in list, view list
         init {
             itemView.setOnClickListener{v:View ->
                 val pos: Int = adapterPosition
                 val intent = Intent(v?.context,ItemListActivity::class.java).apply{}
-                intent.putExtra("Goal",itemGoal)
+                val docRef1 = dbItems.collection(dbData).document("categories").collection(itemTitle.text.toString()).document("info")
+                docRef1.get().addOnCompleteListener { task ->
+                    if(task.isSuccessful){
+                        val document : DocumentSnapshot? = task.getResult()
+                        if(document != null){
+                          var  goalAmount = document.getLong("goal")!!.toInt()
+                            intent.putExtra("Goal",goalAmount)
+                        } else {
+                            Log.d("Logger", "No such document")
+                        }
+                    } else {
+                        Log.d("Logger", "get failed with", task.exception)
+                    }
+
+                }
                 intent.putExtra("Category", itemTitle.text)
                 intent.putExtra("user", dbData)
                 v?.context.startActivity(intent)

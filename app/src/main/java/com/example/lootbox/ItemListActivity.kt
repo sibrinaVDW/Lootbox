@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.log
 
 
 private const val REQUEST_CODE = 42
@@ -57,10 +58,17 @@ class ItemListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_item_list)
+
+        /*for (i in 1..50) {
+            addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
+            addToList("Last of US 2","Second installment of the LOU franchise",R.drawable.launcher_icon,"24/08/2017")
+        }*/
+
         val intent = intent
         data = intent.getStringExtra("user").toString()
         //goalAmount = intent.getIntExtra("Goal",0)
         categoryPass = intent.getStringExtra("Category")
+    //    addToList("COD MW2","Modern Warefare of COD franchise",R.drawable.launcher_icon,"24/08/2017")
 
 
         donutPanel = findViewById(R.id.imgDonutBack)
@@ -73,8 +81,10 @@ class ItemListActivity : AppCompatActivity() {
         progText!!.visibility = View.GONE
 
         donutOpen = false;
-        val dbIns = FirebaseFirestore.getInstance()
 
+        val dbItems = FirebaseFirestore.getInstance(
+        val dbIns = FirebaseFirestore.getInstance()
+        
         var rcvItemList : RecyclerView = findViewById(R.id.rcvItemList)
         rcvItemList.layoutManager = LinearLayoutManager(this)
         rcvItemList.adapter = ItemsRecyclerAdapter(titlesList,descriptionList,imageList,dateList,categoryPass!!,data)
@@ -86,9 +96,24 @@ class ItemListActivity : AppCompatActivity() {
         catDisp.text = categoryPass
         //progress bar
         val pb = findViewById<ProgressBar>(R.id.pb)
+//here
+     /*   val docRef1 = dbItems.collection(data).document("categories").collection(categoryPass!!).document("info")
+        docRef1.get().addOnCompleteListener { task ->
+            if(task.isSuccessful){
+                val document : DocumentSnapshot? = task.getResult()
+                if(document != null){
+                    goalAmount = document.getLong("goal")!!.toInt()
+                } else {
+                    Log.d("Logger", "No such document")
+                }
+            } else {
+                Log.d("Logger", "get failed with", task.exception)
+            }
+
+        }*/
 
         pb.max = goalAmount;
-        val currentProgress = numItems;
+        val currentProgress = itemsGathered;
         ObjectAnimator.ofInt(pb,"Progress",currentProgress)
             .setDuration(2000)
             .start()
@@ -96,6 +121,27 @@ class ItemListActivity : AppCompatActivity() {
         if(itemsGathered == goalAmount)
         {
             //goal achieved, add to DB, do popup, do prompt 4 new goal
+            val newGoalPopUp = LayoutInflater.from(this@ItemListActivity)
+                .inflate(R.layout.next_goal_popup, null)
+            val alertBuilder = AlertDialog.Builder(this@ItemListActivity).setView(newGoalPopUp)
+                .setTitle("Add New Goal")
+            val alertDialog = alertBuilder.show()
+            //adding new goal to list
+            val btnNewGoal : ImageButton = newGoalPopUp.findViewById(R.id.btnNewGoalCreate)
+            btnNewGoal.setOnClickListener(object : View.OnClickListener{
+                override fun onClick(v:View) {
+                    var edtNewGoal :String =  newGoalPopUp.findViewById<TextView>(R.id.edtNewGoal).text.toString()
+                    goalAmount = (edtNewGoal).toInt()
+
+                    //restart goal
+                    itemsGathered = 0
+                 //   goalAmount = intent.getIntExtra("New Goal",0)
+                    var newGoalIndic :TextView = findViewById<TextView>(R.id.txtGoal)
+                    newGoalIndic.text = "You have $itemsGathered out of $goalAmount items collected"
+                   alertDialog.dismiss()
+                    
+                }})
+            
                 var goalTitle : String = "Collect " + goalAmount.toString() + " New Items"
             val db = FirebaseFirestore.getInstance()
             val user = hashMapOf(
@@ -374,7 +420,6 @@ class ItemListActivity : AppCompatActivity() {
         donutBack!!.progress = catSize
         donutProg!!.progress = progress
     }
-
 
 }
 
