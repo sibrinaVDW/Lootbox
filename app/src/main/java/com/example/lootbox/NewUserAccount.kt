@@ -72,8 +72,6 @@ class NewUserAccount : AppCompatActivity() {
         }
     }
 
-   //private fun updateUI(currentUser: FirebaseUser?) {
-
 
     private fun createAccount(email: String, password: String, name: String) {
         mAuth!!.createUserWithEmailAndPassword(email, password)
