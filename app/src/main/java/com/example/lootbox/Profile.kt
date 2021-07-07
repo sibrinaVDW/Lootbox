@@ -20,6 +20,8 @@ class Profile : AppCompatActivity() {
         var email : String? = ""
         var date : String? = ""
         var name : String? = ""
+        var numCats : String? = ""
+        var numGoals : String? = ""
 
         val intent: Intent = intent
         data = intent.getStringExtra("user").toString()
@@ -44,6 +46,41 @@ class Profile : AppCompatActivity() {
                     val usernameDisp : TextView = findViewById(R.id.txtProfileName)
                     usernameDisp.text = name
                     Toast.makeText(this@Profile, name, Toast.LENGTH_LONG).show()
+
+                } else {
+                    Log.d("LOGGER", "No such document")
+                }
+            } else {
+                Log.d("LOGGER", "get failed with ", task.exception)
+            }
+        }
+
+
+        val docRef2: DocumentReference = db.collection(data).document("categories")
+        docRef2.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document: DocumentSnapshot? = task.getResult()
+                if (document != null) {
+                    numCats = (document.getLong("numCats")!!.toInt()).toString()
+                    val catDisp : TextView = findViewById(R.id.txtCategoriesStats)
+                    catDisp.text = numCats
+
+                } else {
+                    Log.d("LOGGER", "No such document")
+                }
+            } else {
+                Log.d("LOGGER", "get failed with ", task.exception)
+            }
+        }
+
+        val docRef3: DocumentReference = db.collection(data).document("goals")
+        docRef3.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val document: DocumentSnapshot? = task.getResult()
+                if (document != null) {
+                    numGoals = (document.getLong("numGoals")!!.toInt()).toString()
+                    val goalDisp : TextView = findViewById(R.id.txtGoalStats)
+                    goalDisp.text = numGoals
 
                 } else {
                     Log.d("LOGGER", "No such document")

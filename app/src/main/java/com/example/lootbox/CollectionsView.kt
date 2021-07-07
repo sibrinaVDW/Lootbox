@@ -82,6 +82,15 @@ class CollectionsView : AppCompatActivity() {
             }
         })
 
+        var btnGoals : ImageButton = findViewById(R.id.btnGoals)
+        btnGoals.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                val intent = Intent(this@CollectionsView,Goals::class.java).apply{}
+                intent.putExtra("user", data)
+                startActivity(intent)
+            }
+        })
+
         var btnProfile : ImageButton = findViewById(R.id.btnProfile)
         btnProfile.setOnClickListener(object: View.OnClickListener{
             override fun onClick(v: View?) {
@@ -155,7 +164,7 @@ class CollectionsView : AppCompatActivity() {
 
     fun uploadImg(name: String, contentUri:Uri){
 
-        var image : StorageReference  = storageRef.child(name)
+        var image : StorageReference  = storageRef.child("images/"+ name)
         var uploadTask = image.putFile(contentUri)
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
@@ -255,6 +264,7 @@ class CollectionsView : AppCompatActivity() {
             "desc" to desc,
             "image" to image,
             "goal" to goal,
+            "itemsGathered" to 0
         )
         db.collection(data)
             .document("categories").collection(title).document("info").set(user)

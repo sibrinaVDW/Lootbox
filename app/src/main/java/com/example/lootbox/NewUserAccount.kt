@@ -99,6 +99,12 @@ class NewUserAccount : AppCompatActivity() {
                     )
                     db.collection((user!!.uid)).document("categories").set(catView)
 
+                    val goalView = hashMapOf(
+                        "existing" to "",
+                        "numGoals" to 0,
+                    )
+                    db.collection((user!!.uid)).document("goals").set(goalView)
+
                     val intent = Intent(this@NewUserAccount,CollectionsView::class.java).apply{}
                     intent.putExtra("user", user?.uid.toString())
                     startActivity(intent)
